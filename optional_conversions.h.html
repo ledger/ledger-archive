@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><!-- ViewVC - http://viewvc.org/
+by Greg Stein - mailto:gstein@lyra.org --><title>SourceForge.net Repository - [cctbx] View of /trunk/boost_adaptbx/optional_conversions.h</title>
+
+
+
+
+
+
+
+
+<meta name="generator" content="ViewVC 1.0.3">
+<link rel="stylesheet" href="optional_conversions_files/styles.css" type="text/css"><script type="text/javascript" src="optional_conversions_files/jquery-latest.txt"></script></head><body>
+<table style="padding: 0.1em;">
+<tbody><tr>
+<td>
+<strong>
+
+<a href="http://cctbx.svn.sourceforge.net/viewvc/cctbx/">
+
+[cctbx]</a>
+/
+
+<a href="http://cctbx.svn.sourceforge.net/viewvc/cctbx/trunk/">
+
+trunk</a>
+/
+
+<a href="http://cctbx.svn.sourceforge.net/viewvc/cctbx/trunk/boost_adaptbx/">
+
+boost_adaptbx</a>
+/
+
+<a href="http://cctbx.svn.sourceforge.net/viewvc/cctbx/trunk/boost_adaptbx/optional_conversions.h?view=log">
+
+optional_conversions.h</a>
+
+
+</strong>
+
+</td>
+</tr>
+</tbody></table>
+
+
+<div style="padding: 5px; float: right;"><a href="http://sourceforge.net/"><img src="optional_conversions_files/sourceforge_whitebg.gif" alt="(logo)" border="0" height="79" width="136"></a></div>
+<h1>View of /trunk/boost_adaptbx/optional_conversions.h</h1>
+
+<p style="margin: 0pt;">
+
+<a href="http://cctbx.svn.sourceforge.net/viewvc/cctbx/trunk/boost_adaptbx/"><img src="optional_conversions_files/back_small.png" alt="Parent Directory" height="16" width="16"> Parent Directory</a>
+
+| <a href="http://cctbx.svn.sourceforge.net/viewvc/cctbx/trunk/boost_adaptbx/optional_conversions.h?view=log#rev3756"><img src="optional_conversions_files/log.png" alt="Revision Log" height="16" width="16"> Revision Log</a>
+
+
+
+
+</p>
+
+<hr>
+<div class="vc_summary">
+Revision <a href="http://cctbx.svn.sourceforge.net/viewvc/cctbx?view=rev&amp;revision=3756"><strong>3756</strong></a> -
+(<a href="http://cctbx.svn.sourceforge.net/viewvc/*checkout*/cctbx/trunk/boost_adaptbx/optional_conversions.h?revision=3756"><strong>download</strong></a>)
+
+(<a href="http://cctbx.svn.sourceforge.net/viewvc/cctbx/trunk/boost_adaptbx/optional_conversions.h?annotate=3756"><strong>annotate</strong></a>)
+
+<br><em>Thu Jul 28 01:11:57 2005 UTC</em>
+(21 months, 2 weeks ago)
+by <em>rwgk</em>
+
+
+
+
+
+
+<br>File size: 2023 byte(s)
+
+
+
+<pre class="vc_log">to_and_from_python
+</pre>
+
+</div>
+<div id="vc_markup"><pre><a id="l_1"></a><span class="line">    1 </span><span class="dir">#ifndef BOOST_ADAPTBX_OPTIONAL_CONVERSIONS_H</span>
+<a id="l_2"></a><span class="line">    2 </span><span class="dir">#define BOOST_ADAPTBX_OPTIONAL_CONVERSIONS_H</span>
+<a id="l_3"></a><span class="line">    3 </span>
+<a id="l_4"></a><span class="line">    4 </span><span class="dir">#include &lt;boost/python/to_python_converter.hpp&gt;</span>
+<a id="l_5"></a><span class="line">    5 </span><span class="dir">#include &lt;boost/python/extract.hpp&gt;</span>
+<a id="l_6"></a><span class="line">    6 </span><span class="dir">#include &lt;boost/optional.hpp&gt;</span>
+<a id="l_7"></a><span class="line">    7 </span>
+<a id="l_8"></a><span class="line">    8 </span><span class="kwa">namespace</span> boost_adaptbx <span class="sym">{</span> <span class="kwa">namespace</span> optional_conversions <span class="sym">{</span>
+<a id="l_9"></a><span class="line">    9 </span>
+<a id="l_10"></a><span class="line">   10 </span>  <span class="kwa">namespace</span> detail <span class="sym">{</span>
+<a id="l_11"></a><span class="line">   11 </span>
+<a id="l_12"></a><span class="line">   12 </span>    <span class="kwc">template</span> <span class="sym">&lt;</span>typename T<span class="sym">&gt;</span>
+<a id="l_13"></a><span class="line">   13 </span>    <span class="kwb">struct</span> to_python
+<a id="l_14"></a><span class="line">   14 </span>    <span class="sym">{</span>
+<a id="l_15"></a><span class="line">   15 </span>      <span class="kwb">static</span> PyObject<span class="sym">*</span>
+<a id="l_16"></a><span class="line">   16 </span>      <span class="kwd">convert</span><span class="sym">(</span>
+<a id="l_17"></a><span class="line">   17 </span>        boost<span class="sym">::</span>optional<span class="sym">&lt;</span>T<span class="sym">&gt;</span> <span class="kwb">const</span><span class="sym">&amp;</span> value<span class="sym">)</span>
+<a id="l_18"></a><span class="line">   18 </span>      <span class="sym">{</span>
+<a id="l_19"></a><span class="line">   19 </span>        <span class="kwa">if</span> <span class="sym">(</span>value<span class="sym">) {</span>
+<a id="l_20"></a><span class="line">   20 </span>          <span class="kwa">return</span> boost<span class="sym">::</span>python<span class="sym">::</span><span class="kwd">incref</span><span class="sym">(</span>boost<span class="sym">::</span>python<span class="sym">::</span><span class="kwd">object</span><span class="sym">(*</span>value<span class="sym">).</span><span class="kwd">ptr</span><span class="sym">());</span>
+<a id="l_21"></a><span class="line">   21 </span>        <span class="sym">}</span>
+<a id="l_22"></a><span class="line">   22 </span>        <span class="kwa">return</span> boost<span class="sym">::</span>python<span class="sym">::</span><span class="kwd">incref</span><span class="sym">(</span>Py_None<span class="sym">);</span>
+<a id="l_23"></a><span class="line">   23 </span>      <span class="sym">}</span>
+<a id="l_24"></a><span class="line">   24 </span>    <span class="sym">};</span>
+<a id="l_25"></a><span class="line">   25 </span>
+<a id="l_26"></a><span class="line">   26 </span>  <span class="sym">}</span> <span class="slc">// namespace detail</span>
+<a id="l_27"></a><span class="line">   27 </span>
+<a id="l_28"></a><span class="line">   28 </span>  <span class="kwc">template</span> <span class="sym">&lt;</span>typename T<span class="sym">&gt;</span>
+<a id="l_29"></a><span class="line">   29 </span>  <span class="kwb">struct</span> to_python
+<a id="l_30"></a><span class="line">   30 </span>  <span class="sym">{</span>
+<a id="l_31"></a><span class="line">   31 </span>    <span class="kwd">to_python</span><span class="sym">()</span>
+<a id="l_32"></a><span class="line">   32 </span>    <span class="sym">{</span>
+<a id="l_33"></a><span class="line">   33 </span>      boost<span class="sym">::</span>python<span class="sym">::</span>to_python_converter<span class="sym">&lt;</span>
+<a id="l_34"></a><span class="line">   34 </span>        boost<span class="sym">::</span>optional<span class="sym">&lt;</span>T<span class="sym">&gt;,</span>
+<a id="l_35"></a><span class="line">   35 </span>        detail<span class="sym">::</span>to_python<span class="sym">&lt;</span>T<span class="sym">&gt; &gt;();</span>
+<a id="l_36"></a><span class="line">   36 </span>    <span class="sym">}</span>
+<a id="l_37"></a><span class="line">   37 </span>  <span class="sym">};</span>
+<a id="l_38"></a><span class="line">   38 </span>
+<a id="l_39"></a><span class="line">   39 </span>  <span class="kwc">template</span> <span class="sym">&lt;</span>typename T<span class="sym">&gt;</span>
+<a id="l_40"></a><span class="line">   40 </span>  <span class="kwb">struct</span> from_python
+<a id="l_41"></a><span class="line">   41 </span>  <span class="sym">{</span>
+<a id="l_42"></a><span class="line">   42 </span>    <span class="kwd">from_python</span><span class="sym">()</span>
+<a id="l_43"></a><span class="line">   43 </span>    <span class="sym">{</span>
+<a id="l_44"></a><span class="line">   44 </span>      boost<span class="sym">::</span>python<span class="sym">::</span>converter<span class="sym">::</span>registry<span class="sym">::</span><span class="kwd">push_back</span><span class="sym">(</span>
+<a id="l_45"></a><span class="line">   45 </span>        <span class="sym">&amp;</span>convertible<span class="sym">,</span>
+<a id="l_46"></a><span class="line">   46 </span>        <span class="sym">&amp;</span>construct<span class="sym">,</span>
+<a id="l_47"></a><span class="line">   47 </span>        boost<span class="sym">::</span>python<span class="sym">::</span>type_id<span class="sym">&lt;</span>boost<span class="sym">::</span>optional<span class="sym">&lt;</span>T<span class="sym">&gt; &gt;());</span>
+<a id="l_48"></a><span class="line">   48 </span>    <span class="sym">}</span>
+<a id="l_49"></a><span class="line">   49 </span>
+<a id="l_50"></a><span class="line">   50 </span>    <span class="kwb">static void</span><span class="sym">*</span> <span class="kwd">convertible</span><span class="sym">(</span>PyObject<span class="sym">*</span> obj_ptr<span class="sym">)</span>
+<a id="l_51"></a><span class="line">   51 </span>    <span class="sym">{</span>
+<a id="l_52"></a><span class="line">   52 </span>      <span class="kwa">if</span> <span class="sym">(</span>obj_ptr <span class="sym">!=</span> Py_None<span class="sym">) {</span>
+<a id="l_53"></a><span class="line">   53 </span>        boost<span class="sym">::</span>python<span class="sym">::</span>extract<span class="sym">&lt;</span>T<span class="sym">&gt;</span> <span class="kwd">proxy</span><span class="sym">(</span>obj_ptr<span class="sym">);</span>
+<a id="l_54"></a><span class="line">   54 </span>        <span class="kwa">if</span> <span class="sym">(!</span>proxy<span class="sym">.</span><span class="kwd">check</span><span class="sym">())</span> <span class="kwa">return</span> <span class="num">0</span><span class="sym">;</span>
+<a id="l_55"></a><span class="line">   55 </span>      <span class="sym">}</span>
+<a id="l_56"></a><span class="line">   56 </span>      <span class="kwa">return</span> obj_ptr<span class="sym">;</span>
+<a id="l_57"></a><span class="line">   57 </span>    <span class="sym">}</span>
+<a id="l_58"></a><span class="line">   58 </span>
+<a id="l_59"></a><span class="line">   59 </span>    <span class="kwb">static void</span> <span class="kwd">construct</span><span class="sym">(</span>
+<a id="l_60"></a><span class="line">   60 </span>      PyObject<span class="sym">*</span> obj_ptr<span class="sym">,</span>
+<a id="l_61"></a><span class="line">   61 </span>      boost<span class="sym">::</span>python<span class="sym">::</span>converter<span class="sym">::</span>rvalue_from_python_stage1_data<span class="sym">*</span> data<span class="sym">)</span>
+<a id="l_62"></a><span class="line">   62 </span>    <span class="sym">{</span>
+<a id="l_63"></a><span class="line">   63 </span>      boost<span class="sym">::</span>optional<span class="sym">&lt;</span>T<span class="sym">&gt;</span> value<span class="sym">;</span>
+<a id="l_64"></a><span class="line">   64 </span>      <span class="kwa">if</span> <span class="sym">(</span>obj_ptr <span class="sym">!=</span> Py_None<span class="sym">) {</span>
+<a id="l_65"></a><span class="line">   65 </span>        boost<span class="sym">::</span>python<span class="sym">::</span>extract<span class="sym">&lt;</span>T<span class="sym">&gt;</span> <span class="kwd">proxy</span><span class="sym">(</span>obj_ptr<span class="sym">);</span>
+<a id="l_66"></a><span class="line">   66 </span>        value<span class="sym">.</span><span class="kwd">reset</span><span class="sym">(</span><span class="kwd">proxy</span><span class="sym">());</span>
+<a id="l_67"></a><span class="line">   67 </span>      <span class="sym">}</span>
+<a id="l_68"></a><span class="line">   68 </span>      <span class="kwb">void</span><span class="sym">*</span> storage <span class="sym">= (</span>
+<a id="l_69"></a><span class="line">   69 </span>        <span class="sym">(</span>boost<span class="sym">::</span>python<span class="sym">::</span>converter<span class="sym">::</span>rvalue_from_python_storage<span class="sym">&lt;</span>
+<a id="l_70"></a><span class="line">   70 </span>          boost<span class="sym">::</span>optional<span class="sym">&lt;</span>T<span class="sym">&gt; &gt;*)</span>
+<a id="l_71"></a><span class="line">   71 </span>            data<span class="sym">)-&gt;</span>storage<span class="sym">.</span>bytes<span class="sym">;</span>
+<a id="l_72"></a><span class="line">   72 </span>      <span class="kwa">new</span> <span class="sym">(</span>storage<span class="sym">)</span> boost<span class="sym">::</span>optional<span class="sym">&lt;</span>T<span class="sym">&gt;(</span>value<span class="sym">);</span>
+<a id="l_73"></a><span class="line">   73 </span>      data<span class="sym">-&gt;</span>convertible <span class="sym">=</span> storage<span class="sym">;</span>
+<a id="l_74"></a><span class="line">   74 </span>    <span class="sym">}</span>
+<a id="l_75"></a><span class="line">   75 </span>  <span class="sym">};</span>
+<a id="l_76"></a><span class="line">   76 </span>
+<a id="l_77"></a><span class="line">   77 </span>  <span class="kwc">template</span> <span class="sym">&lt;</span>typename T<span class="sym">&gt;</span>
+<a id="l_78"></a><span class="line">   78 </span>  <span class="kwb">struct</span> to_and_from_python
+<a id="l_79"></a><span class="line">   79 </span>  <span class="sym">{</span>
+<a id="l_80"></a><span class="line">   80 </span>    <span class="kwd">to_and_from_python</span><span class="sym">()</span>
+<a id="l_81"></a><span class="line">   81 </span>    <span class="sym">{</span>
+<a id="l_82"></a><span class="line">   82 </span>      to_python<span class="sym">&lt;</span>T<span class="sym">&gt;();</span>
+<a id="l_83"></a><span class="line">   83 </span>      from_python<span class="sym">&lt;</span>T<span class="sym">&gt;();</span>
+<a id="l_84"></a><span class="line">   84 </span>    <span class="sym">}</span>
+<a id="l_85"></a><span class="line">   85 </span>  <span class="sym">};</span>
+<a id="l_86"></a><span class="line">   86 </span>
+<a id="l_87"></a><span class="line">   87 </span><span class="sym">}}</span> <span class="slc">// namespace boost_adptbx::optional_conversions</span>
+<a id="l_88"></a><span class="line">   88 </span>
+<a id="l_89"></a><span class="line">   89 </span><span class="dir">#endif</span> <span class="slc">// BOOST_ADAPTBX_OPTIONAL_CONVERSIONS_H</span><span class="dir"></span>
+</pre></div>
+
+<hr>
+<table>
+<tbody><tr>
+<td>
+<address><a href="http://sourceforge.net/">Back to SourceForge.net</a></address><br>
+Powered by <a href="http://viewvc.tigris.org/">ViewVC 1.0.3</a>
+</td>
+<td style="text-align: right;">
+<h3><a href="http://cctbx.svn.sourceforge.net/viewvc/*docroot*/help_rootview.html">ViewVC and Help</a></h3>
+</td>
+</tr>
+</tbody></table>
+</body></html>

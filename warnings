@@ -1,0 +1,457 @@
+/Users/johnw/src/ledger/src/data/builder.h:109: warning:   but does not override ‘ledger::xml::document_builder_t(const ledger::xml::document_builder_t&)’
+/Users/johnw/src/ledger/src/data/builder.h:109: warning:   or ‘operator=(const ledger::xml::document_builder_t&)’
+/Users/johnw/src/ledger/src/data/builder.h:109: warning: ‘class ledger::xml::document_builder_t’ has pointer data members
+/Users/johnw/src/ledger/src/data/builder.h:119: warning: ‘ledger::xml::document_builder_t::current_attrs’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/builder.h:119: warning: ‘ledger::xml::document_builder_t::current_text’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/builder.h:120: warning: synthesized method ‘ledger::xml::builder_t::builder_t()’ first required here 
+/Users/johnw/src/ledger/src/data/builder.h:131: warning: ‘virtual void ledger::xml::document_builder_t::begin_node(const ledger::string&, bool)’ was hidden
+/Users/johnw/src/ledger/src/data/builder.h:170: warning: unused parameter ‘end_pos’
+/Users/johnw/src/ledger/src/data/builder.h:170: warning: unused parameter ‘name’
+/Users/johnw/src/ledger/src/data/builder.h:174: warning: unused parameter ‘end_pos’
+/Users/johnw/src/ledger/src/data/builder.h:174: warning: unused parameter ‘name_id’
+/Users/johnw/src/ledger/src/data/builder.h:197: warning: ‘ledger::xml::xml_writer_t::current_attrs’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/builder.h:210: warning: unused parameter ‘name_id’
+/Users/johnw/src/ledger/src/data/builder.h:214: warning: unused parameter ‘terminal’
+/Users/johnw/src/ledger/src/data/builder.h:221: warning: unused parameter ‘name_id’
+/Users/johnw/src/ledger/src/data/builder.h:221: warning: unused parameter ‘terminal’
+/Users/johnw/src/ledger/src/data/builder.h:231: warning: unused parameter ‘name_id’
+/Users/johnw/src/ledger/src/data/builder.h:242: warning: unused parameter ‘end_pos’
+/Users/johnw/src/ledger/src/data/builder.h:247: warning: unused parameter ‘name_id’
+/Users/johnw/src/ledger/src/data/builder.h:50: warning: ‘ledger::xml::builder_t::current_position’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/builder.h:73: warning: unused parameter ‘in’
+/Users/johnw/src/ledger/src/data/builder.h:74: warning: unused parameter ‘position’
+/Users/johnw/src/ledger/src/data/compile.cc: In member function ‘void ledger::xml::transaction_node_t::parse_amount_expr(ledger::xml::xpath_t::scope_t&, const char*)’:
+/Users/johnw/src/ledger/src/data/compile.cc:106: warning: use of old-style cast
+/Users/johnw/src/ledger/src/data/compile.cc:133: warning: converting negative value ‘-0x00000000000000001’ to ‘unsigned int’
+/Users/johnw/src/ledger/src/data/compile.cc:62: warning: unused parameter ‘scope’
+/Users/johnw/src/ledger/src/data/compile.cc:68: warning: unused parameter ‘scope’
+/Users/johnw/src/ledger/src/data/document.cc: In static member function ‘static boost::optional<uint_fast16_t> ledger::xml::document_t::lookup_builtin_id(const ledger::string&)’:
+/Users/johnw/src/ledger/src/data/document.cc:124: warning: use of old-style cast
+/Users/johnw/src/ledger/src/data/document.cc:130: warning: use of old-style cast
+/Users/johnw/src/ledger/src/data/document.h:108: warning: ‘ledger::xml::document_t::names’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/jbuilder.h:59: warning:   but does not override ‘ledger::xml::journal_builder_t(const ledger::xml::journal_builder_t&)’
+/Users/johnw/src/ledger/src/data/jbuilder.h:59: warning:   or ‘operator=(const ledger::xml::journal_builder_t&)’
+/Users/johnw/src/ledger/src/data/jbuilder.h:59: warning: ‘class ledger::xml::journal_builder_t’ has pointer data members
+/Users/johnw/src/ledger/src/data/jbuilder.h:75: warning:   by ‘virtual void ledger::xml::journal_builder_t::begin_node(uint_fast16_t, bool)’
+/Users/johnw/src/ledger/src/data/journal.cc: In destructor ‘ledger::journal_t::~journal_t()’:
+/Users/johnw/src/ledger/src/data/journal.cc:349: warning: ‘ledger::auto_entry_t::predicate’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.cc:364: warning: unused parameter ‘entry’
+/Users/johnw/src/ledger/src/data/journal.cc:364: warning: unused parameter ‘post’
+/Users/johnw/src/ledger/src/data/journal.cc:547: warning: use of old-style cast
+/Users/johnw/src/ledger/src/data/journal.cc:556: warning: use of old-style cast
+/Users/johnw/src/ledger/src/data/journal.cc:565: warning: use of old-style cast
+/Users/johnw/src/ledger/src/data/journal.h:123: warning:   but does not override ‘operator=(const ledger::entry_base_t&)’
+/Users/johnw/src/ledger/src/data/journal.h:123: warning: ‘class ledger::entry_base_t’ has pointer data members
+/Users/johnw/src/ledger/src/data/journal.h:128: warning: ‘ledger::entry_base_t::transactions’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:131: warning: ‘ledger::entry_base_t::transactions’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:172: warning: ‘ledger::entry_t::_date_eff’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:172: warning: ‘ledger::entry_t::_date’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:172: warning: ‘ledger::entry_t::code’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:172: warning: ‘ledger::entry_t::payee’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:237: warning:   but does not override ‘ledger::auto_entry_finalizer_t(const ledger::auto_entry_finalizer_t&)’
+/Users/johnw/src/ledger/src/data/journal.h:237: warning:   or ‘operator=(const ledger::auto_entry_finalizer_t&)’
+/Users/johnw/src/ledger/src/data/journal.h:237: warning: ‘struct ledger::auto_entry_finalizer_t’ has pointer data members
+/Users/johnw/src/ledger/src/data/journal.h:250: warning: ‘ledger::period_entry_t::period_string’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:250: warning: ‘ledger::period_entry_t::period’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:275: warning:   but does not override ‘ledger::account_t(const ledger::account_t&)’
+/Users/johnw/src/ledger/src/data/journal.h:275: warning:   or ‘operator=(const ledger::account_t&)’
+/Users/johnw/src/ledger/src/data/journal.h:275: warning: ‘class ledger::account_t’ has pointer data members
+/Users/johnw/src/ledger/src/data/journal.h:291: warning: ‘ledger::account_t::_fullname’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:291: warning: ‘ledger::account_t::accounts’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:291: warning: ‘ledger::account_t::journal’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:365: warning:   but does not override ‘ledger::journal_t(const ledger::journal_t&)’
+/Users/johnw/src/ledger/src/data/journal.h:365: warning:   or ‘operator=(const ledger::journal_t&)’
+/Users/johnw/src/ledger/src/data/journal.h:365: warning: ‘class ledger::journal_t’ has pointer data members
+/Users/johnw/src/ledger/src/data/journal.h:381: warning: ‘ledger::journal_t::accounts_cache’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:381: warning: ‘ledger::journal_t::auto_entries’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:381: warning: ‘ledger::journal_t::entries’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:381: warning: ‘ledger::journal_t::entry_finalize_hooks’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:381: warning: ‘ledger::journal_t::master’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:381: warning: ‘ledger::journal_t::period_entries’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:381: warning: ‘ledger::journal_t::price_db’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:381: warning: ‘ledger::journal_t::sources’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:52: warning:   but does not override ‘operator=(const ledger::transaction_t&)’
+/Users/johnw/src/ledger/src/data/journal.h:52: warning: ‘class ledger::transaction_t’ has pointer data members
+/Users/johnw/src/ledger/src/data/journal.h:67: warning: ‘ledger::transaction_t::_date_eff’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:67: warning: ‘ledger::transaction_t::_date’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:67: warning: ‘ledger::transaction_t::amount’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:67: warning: ‘ledger::transaction_t::cost’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:67: warning: ‘ledger::transaction_t::note’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:75: warning: ‘ledger::transaction_t::_date_eff’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:75: warning: ‘ledger::transaction_t::_date’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/journal.h:75: warning: ‘ledger::transaction_t::cost’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/node.h:219: warning: ‘ledger::xml::parent_node_t::children’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/node.h:230:   instantiated from ‘T* ledger::xml::parent_node_t::create_child(uint_fast16_t) [with T = ledger::xml::terminal_node_t]’
+/Users/johnw/src/ledger/src/data/node.h:323: warning: ‘ledger::xml::terminal_node_t::data’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/node.h:86: warning: ‘ledger::xml::node_t::attributes’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/data/node.h:86: warning: ‘ledger::xml::node_t::compiled’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/driver/main.cc: In function ‘int read_and_report(ledger::report_t&, int, char**, char**)’:
+/Users/johnw/src/ledger/src/driver/main.cc:249: warning: use of old-style cast
+/Users/johnw/src/ledger/src/driver/option.cc:153: warning: unused parameter ‘argc’
+/Users/johnw/src/ledger/src/driver/report.cc: In member function ‘ledger::value_t ledger::report_t::abbrev(ledger::xml::xpath_t::call_scope_t&)’:
+/Users/johnw/src/ledger/src/driver/report.cc:62: warning: use of old-style cast
+/Users/johnw/src/ledger/src/driver/report.cc:68: warning: use of old-style cast
+/Users/johnw/src/ledger/src/driver/report.h:116: warning: unused parameter ‘args’
+/Users/johnw/src/ledger/src/driver/report.h:121: warning: unused parameter ‘args’
+/Users/johnw/src/ledger/src/driver/report.h:43: warning:   but does not override ‘ledger::report_t(const ledger::report_t&)’
+/Users/johnw/src/ledger/src/driver/report.h:43: warning:   or ‘operator=(const ledger::report_t&)’
+/Users/johnw/src/ledger/src/driver/report.h:43: warning: ‘class ledger::report_t’ has pointer data members
+/Users/johnw/src/ledger/src/driver/report.h:64: warning: ‘ledger::report_t::account’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/driver/report.h:64: warning: ‘ledger::report_t::amount_expr’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/driver/report.h:64: warning: ‘ledger::report_t::budget_flags’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/driver/report.h:64: warning: ‘ledger::report_t::date_output_format’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/driver/report.h:64: warning: ‘ledger::report_t::format_string’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/driver/report.h:64: warning: ‘ledger::report_t::output_file’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/driver/report.h:64: warning: ‘ledger::report_t::pager’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/driver/report.h:64: warning: ‘ledger::report_t::total_expr’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/driver/report.h:64: warning: ‘ledger::report_t::transforms’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/driver/report.h:92: warning: unused parameter ‘expr’
+/Users/johnw/src/ledger/src/driver/session.cc:71: warning: ‘ledger::session_t::cache_file’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/driver/session.cc:71: warning: ‘ledger::session_t::data_file’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/driver/session.cc:71: warning: ‘ledger::session_t::init_file’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/driver/session.cc:71: warning: ‘ledger::session_t::journals’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/driver/session.cc:71: warning: ‘ledger::session_t::parsers’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/driver/session.cc:71: warning: ‘ledger::session_t::price_db’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/driver/session.h:141: warning: unused parameter ‘locals’
+/Users/johnw/src/ledger/src/driver/session.h:144: warning: unused parameter ‘locals’
+/Users/johnw/src/ledger/src/numerics/amount.cc: In member function ‘void ledger::amount_t::read(const char*&)’:
+/Users/johnw/src/ledger/src/numerics/amount.cc: In member function ‘void ledger::amount_t::read(std::istream&)’:
+/Users/johnw/src/ledger/src/numerics/amount.cc: In member function ‘void ledger::amount_t::write(std::ostream&, bool) const’:
+/Users/johnw/src/ledger/src/numerics/amount.cc:1251: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/amount.cc:1262: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/amount.cc:1265: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/amount.cc:1296: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/amount.cc:1302: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/amount.cc:1312: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/amount.cc:1314: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/amount.cc:1320: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/amount.cc:1323: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/amount.cc:1361: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/amount.cc:1370: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/amount.cc:1373: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/amount.cc:1381: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/amount.cc:290: warning: ‘ledger::amount_t::quantity’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/amount.cc:297: warning: ‘ledger::amount_t::quantity’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/amount.cc:304: warning: ‘ledger::amount_t::quantity’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/amount.h:179: warning: ‘ledger::amount_t::commodity_’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/amount.h:183: warning: ‘ledger::amount_t::commodity_’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/amount.h:220: warning: ‘ledger::amount_t::commodity_’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/balance.h:106: warning: ‘ledger::balance_t::amounts’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/balance.h:109: warning: ‘ledger::balance_t::amounts’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/balance.h:117: warning: ‘ledger::balance_t::amounts’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/balance.h:122: warning: ‘ledger::balance_t::amounts’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/balance.h:127: warning: ‘ledger::balance_t::amounts’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/balance.h:133: warning: ‘ledger::balance_t::amounts’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/balance.h:138: warning: ‘ledger::balance_t::amounts’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/balance.h:502: warning: ‘virtual bool ledger::balance_t::valid() const’ was hidden
+/Users/johnw/src/ledger/src/numerics/balance.h:76: warning: base class ‘struct boost::equality_comparable<ledger::balance_t, boost::equality_comparable<ledger::balance_t, ledger::amount_t, boost::equality_comparable<ledger::balance_t, double, boost::equality_comparable<ledger::balance_t, long unsigned int, boost::equality_comparable<ledger::balance_t, long int, boost::additive<ledger::balance_t, boost::additive<ledger::balance_t, ledger::amount_t, boost::additive<ledger::balance_t, double, boost::additive<ledger::balance_t, long unsigned int, boost::additive<ledger::balance_t, long int, boost::multiplicative<ledger::balance_t, ledger::amount_t, boost::multiplicative<ledger::balance_t, double, boost::multiplicative<ledger::balance_t, long unsigned int, boost::multiplicative<ledger::balance_t, long int, boost::detail::empty_base, boost::detail::false_t>, boost::detaimv -f .deps/UnitTests-t_commodity.Tpo .deps/UnitTests-t_commodity.Po
+/Users/johnw/src/ledger/src/numerics/balance.h:76: warning: base class ‘struct boost::equality_comparable<ledger::balance_t, boost::equality_comparable<ledger::balance_t, ledger::amount_t, boost::equality_comparable<ledger::balance_t, double, boost::equality_comparable<ledger::balance_t, long unsigned int, boost::equality_comparable<ledger::balance_t, long int, boost::additive<ledger::balance_t, boost::additive<ledger::balance_t, ledger::amount_t, boost::additive<ledger::balance_t, double, boost::additive<ledger::balance_t, long unsigned int, boost::additive<ledger::balance_t, long int, boost::multiplicative<ledger::balance_t, ledger::amount_t, boost::multiplicative<ledger::balance_t, double, boost::multiplicative<ledger::balance_t, long unsigned int, boost::multiplicative<ledger::balance_t, long int, boost::detail::empty_base, boost::detail::false_t>, boost::detaint_node_t&>&)’:
+/Users/johnw/src/ledger/src/numerics/balpair.h: In member function ‘ledger::balance_t& ledger::balance_pair_t::operator=(const char*)’:
+/Users/johnw/src/ledger/src/numerics/balpair.h: In member function ‘ledger::balance_t& ledger::balance_pair_t::operator=(const ledger::string&)’:
+/Users/johnw/src/ledger/src/numerics/balpair.h:105: warning: ‘ledger::balance_pair_t::cost’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/balpair.h:112: warning: ‘ledger::balance_pair_t::cost’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/balpair.h:115: warning: ‘ledger::balance_pair_t::cost’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/balpair.h:118: warning: ‘ledger::balance_pair_t::cost’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/balpair.h:122: warning: ‘ledger::balance_pair_t::cost’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/balpair.h:125: warning: ‘ledger::balance_pair_t::cost’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/balpair.h:162: warning: ‘operator=’ should return a reference to ‘*this’
+/Users/johnw/src/ledger/src/numerics/balpair.h:165: warning: ‘operator=’ should return a reference to ‘*this’
+/Users/johnw/src/ledger/src/numerics/balpair.h:354: warning:   by ‘virtual bool ledger::balance_pair_t::valid()’
+/Users/johnw/src/ledger/src/numerics/balpair.h:94: warning: ‘ledger::balance_pair_t::cost’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/balpair.h:97: warning: ‘ledger::balance_pair_t::cost’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/commodity.cc: In member function ‘void ledger::commodity_t::add_price(const ledger::moment_t&, const ledger::amount_t&)’:
+/Users/johnw/src/ledger/src/numerics/commodity.cc: In static member function ‘static void ledger::commodity_t::parse_symbol(std::istream&, ledger::string&)’:
+/Users/johnw/src/ledger/src/numerics/commodity.cc:172: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/commodity.cc:410: warning: ‘ledger::commodity_pool_t::commodities’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/commodity.cc:410: warning: ‘ledger::commodity_pool_t::get_quote’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/commodity.cc:410: warning: ‘ledger::commodity_pool_t::null_commodity’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/commodity.cc:51: warning: synthesized method ‘ledger::commodity_t::base_t::history_t::history_t()’ first required here 
+/Users/johnw/src/ledger/src/numerics/commodity.h:107: warning: ‘ledger::commodity_t::ident’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/commodity.h:107: warning: ‘ledger::commodity_t::mapping_key_’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/commodity.h:107: warning: ‘ledger::commodity_t::qualified_symbol’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/commodity.h:255: warning:   but does not override ‘ledger::annotated_commodity_t(const ledger::annotated_commodity_t&)’
+/Users/johnw/src/ledger/src/numerics/commodity.h:255: warning:   or ‘operator=(const ledger::annotated_commodity_t&)’
+/Users/johnw/src/ledger/src/numerics/commodity.h:255: warning: ‘class ledger::annotated_commodity_t’ has pointer data members
+/Users/johnw/src/ledger/src/numerics/commodity.h:309: warning:   but does not override ‘ledger::commodity_pool_t(const ledger::commodity_pool_t&)’
+/Users/johnw/src/ledger/src/numerics/commodity.h:309: warning:   or ‘operator=(const ledger::commodity_pool_t&)’
+/Users/johnw/src/ledger/src/numerics/commodity.h:309: warning: ‘class ledger::commodity_pool_t’ has pointer data members
+/Users/johnw/src/ledger/src/numerics/commodity.h:50: warning:   but does not override ‘ledger::commodity_t(const ledger::commodity_t&)’
+/Users/johnw/src/ledger/src/numerics/commodity.h:50: warning:   or ‘operator=(const ledger::commodity_t&)’
+/Users/johnw/src/ledger/src/numerics/commodity.h:50: warning: ‘class ledger::commodity_t’ has pointer data members
+/Users/johnw/src/ledger/src/numerics/commodity.h:58:   instantiated from ‘void boost::optional_detail::optional_base<T>::construct(typename boost::mpl::if_<typename boost::is_reference<T>::type, boost::optional_detail::types_when_is_ref<T>, boost::optional_detail::types_when_isnt_ref<T> >::type::argument_type) [with T = ledger::commodity_t::base_t::history_t]’
+/Users/johnw/src/ledger/src/numerics/commodity.h:58: warning: ‘ledger::commodity_t::base_t::history_t::last_lookup’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/commodity.h:58: warning: ‘ledger::commodity_t::base_t::history_t::prices’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/commodity.h:80: warning: ‘ledger::commodity_t::base_t::history’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/commodity.h:80: warning: ‘ledger::commodity_t::base_t::larger’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/commodity.h:80: warning: ‘ledger::commodity_t::base_t::name’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/commodity.h:80: warning: ‘ledger::commodity_t::base_t::note’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/commodity.h:80: warning: ‘ledger::commodity_t::base_t::smaller’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/value.cc: In member function ‘void ledger::value_t::in_place_simplify()’:
+/Users/johnw/src/ledger/src/numerics/value.cc: In member function ‘void ledger::value_t::storage_t::destroy()’:
+/Users/johnw/src/ledger/src/numerics/value.cc: In static member function ‘static void ledger::value_t::initialize()’:
+/Users/johnw/src/ledger/src/numerics/value.cc:246: warning:   in call to ‘std::basic_ostream<_CharT, _Traits>& std::basic_ostream<_CharT, _Traits>::operator<<(int) [with _CharT = char, _Traits = std::char_traits<char>]’
+/Users/johnw/src/ledger/src/numerics/value.cc:246: warning: passing ‘ledger::value_t::type_t’ chooses ‘int’ over ‘long int’
+/Users/johnw/src/ledger/src/numerics/value.cc:246: warning: passing ‘ledger::value_t::type_t’ chooses ‘int’ over ‘long unsigned int’
+/Users/johnw/src/ledger/src/numerics/value.cc:246: warning: passing ‘ledger::value_t::type_t’ chooses ‘int’ over ‘unsigned int’
+/Users/johnw/src/ledger/src/numerics/value.cc:44: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.cc:47: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.cc:50: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.cc:53: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.cc:56: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.cc:59: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.cc:76: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.cc:80: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.cc:82: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.cc:83: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.cc:84: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.cc:85: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.cc:86: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.cc:87: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.cc:88: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.cc:89: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.cc:90: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.cc:91: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘T& ledger::value_t::as_ref() const’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘T& ledger::value_t::as_ref_lval()’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘T* ledger::value_t::as_pointer() const’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘T*& ledger::value_t::as_pointer_lval()’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘bool& ledger::value_t::as_boolean_lval()’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘boost::any ledger::value_t::as_any_pointer() const’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘boost::any& ledger::value_t::as_any_pointer_lval()’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘const bool& ledger::value_t::as_boolean() const’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘const ledger::amount_t& ledger::value_t::as_amount() const’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘const ledger::balance_pair_t& ledger::value_t::as_balance_pair() const’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘const ledger::balance_t& ledger::value_t::as_balance() const’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘const ledger::moment_t& ledger::value_t::as_datetime() const’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘const ledger::string& ledger::value_t::as_string() const’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘const long int& ledger::value_t::as_long() const’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘const std::vector<ledger::value_t, std::allocator<ledger::value_t> >& ledger::value_t::as_sequence() const’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘ledger::amount_t& ledger::value_t::as_amount_lval()’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘ledger::balance_pair_t& ledger::value_t::as_balance_pair_lval()’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘ledger::balance_t& ledger::value_t::as_balance_lval()’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘ledger::moment_t& ledger::value_t::as_datetime_lval()’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘ledger::string& ledger::value_t::as_string_lval()’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘ledger::xml::node_t* ledger::value_t::as_xml_node() const’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘ledger::xml::node_t*& ledger::value_t::as_xml_node_lval()’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘long int& ledger::value_t::as_long_lval()’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘std::vector<ledger::value_t, std::allocator<ledger::value_t> >& ledger::value_t::as_sequence_lval()’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘void ledger::value_t::_dup()’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘void ledger::value_t::set_amount(const ledger::amount_t&)’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘void ledger::value_t::set_any_pointer(const boost::any&)’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘void ledger::value_t::set_balance(const ledger::balance_t&)’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘void ledger::value_t::set_balance_pair(const ledger::balance_pair_t&)’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘void ledger::value_t::set_datetime(const ledger::moment_t&)’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘void ledger::value_t::set_long(long int)’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘void ledger::value_t::set_pointer(T*)’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘void ledger::value_t::set_sequence(const std::vector<ledger::value_t, std::allocator<ledger::value_t> >&)’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘void ledger::value_t::set_string(const ledger::string&)’:
+/Users/johnw/src/ledger/src/numerics/value.h: In member function ‘void ledger::value_t::set_xml_node(ledger::xml::node_t*)’:
+/Users/johnw/src/ledger/src/numerics/value.h:152: warning: ‘ledger::value_t::storage’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/value.h:156: warning: ‘ledger::value_t::storage’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/value.h:160: warning: ‘ledger::value_t::storage’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/value.h:164: warning: ‘ledger::value_t::storage’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/value.h:168: warning: ‘ledger::value_t::storage’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/value.h:172: warning: ‘ledger::value_t::storage’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/value.h:176: warning: ‘ledger::value_t::storage’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/value.h:180: warning: ‘ledger::value_t::storage’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/value.h:187: warning: ‘ledger::value_t::storage’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/value.h:194: warning: ‘ledger::value_t::storage’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/value.h:198: warning: ‘ledger::value_t::storage’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/value.h:202: warning: ‘ledger::value_t::storage’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/value.h:206: warning: ‘ledger::value_t::storage’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/value.h:210: warning: ‘ledger::value_t::storage’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/value.h:215: warning: ‘ledger::value_t::storage’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/numerics/value.h:245: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:246: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:249: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:250: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:253: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:254: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:311: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:315: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:328: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:332: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:336: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:345: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:349: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:353: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:362: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:366: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:370: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:379: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:383: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:387: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:396: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:400: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:404: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:413: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:417: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:421: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:430: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:434: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:438: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:447: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:451: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:455: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:464: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:470: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:476: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:480: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:485: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:490: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:494: warning: use of old-style cast
+/Users/johnw/src/ledger/src/numerics/value.h:499: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_times.cc: In static member function ‘static PyObject* ledger::date_to_python::convert(const ledger::date&)’:
+/Users/johnw/src/ledger/src/python/py_times.cc: In static member function ‘static PyObject* ledger::datetime_to_python::convert(const ledger::moment_t&)’:
+/Users/johnw/src/ledger/src/python/py_times.cc: In static member function ‘static void ledger::date_from_python::construct(PyObject*, boost::python::converter::rvalue_from_python_stage1_data*)’:
+/Users/johnw/src/ledger/src/python/py_times.cc: In static member function ‘static void ledger::datetime_from_python::construct(PyObject*, boost::python::converter::rvalue_from_python_stage1_data*)’:
+/Users/johnw/src/ledger/src/python/py_times.cc: In static member function ‘static void* ledger::date_from_python::convertible(PyObject*)’:
+/Users/johnw/src/ledger/src/python/py_times.cc: In static member function ‘static void* ledger::datetime_from_python::convertible(PyObject*)’:
+/Users/johnw/src/ledger/src/python/py_times.cc:101: warning: deprecated conversion from string constant to ‘char*’'
+/Users/johnw/src/ledger/src/python/py_times.cc:101: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_times.cc:108: warning: deprecated conversion from string constant to ‘char*’'
+/Users/johnw/src/ledger/src/python/py_times.cc:108: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_times.cc:109: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_times.cc:110: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_times.cc:111: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_times.cc:112: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_times.cc:113: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_times.cc:114: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_times.cc:117: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_times.cc:55: warning: deprecated conversion from string constant to ‘char*’'
+/Users/johnw/src/ledger/src/python/py_times.cc:55: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_times.cc:64: warning: deprecated conversion from string constant to ‘char*’'
+/Users/johnw/src/ledger/src/python/py_times.cc:64: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_times.cc:71: warning: deprecated conversion from string constant to ‘char*’'
+/Users/johnw/src/ledger/src/python/py_times.cc:71: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_times.cc:72: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_times.cc:73: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_times.cc:74: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_times.cc:76: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_times.cc:88: warning: deprecated conversion from string constant to ‘char*’'
+/Users/johnw/src/ledger/src/python/py_times.cc:88: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_utils.cc: In static member function ‘static PyObject* ledger::bool_to_python::convert(bool)’:
+/Users/johnw/src/ledger/src/python/py_utils.cc: In static member function ‘static void ledger::bool_from_python::construct(PyObject*, boost::python::converter::rvalue_from_python_stage1_data*)’:
+/Users/johnw/src/ledger/src/python/py_utils.cc: In static member function ‘static void ledger::istream_from_python::construct(PyObject*, boost::python::converter::rvalue_from_python_stage1_data*)’:
+/Users/johnw/src/ledger/src/python/py_utils.cc: In static member function ‘static void ledger::ostream_from_python::construct(PyObject*, boost::python::converter::rvalue_from_python_stage1_data*)’:
+/Users/johnw/src/ledger/src/python/py_utils.cc: In static member function ‘static void ledger::string_from_python::construct(PyObject*, boost::python::converter::rvalue_from_python_stage1_data*)’:
+/Users/johnw/src/ledger/src/python/py_utils.cc:110: warning: unused parameter ‘str’
+/Users/johnw/src/ledger/src/python/py_utils.cc:126: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_utils.cc:138: warning: unused parameter ‘str’
+/Users/johnw/src/ledger/src/python/py_utils.cc:154: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_utils.cc:48: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_utils.cc:50: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_utils.cc:65: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_utils.cc:66: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/py_utils.cc:98: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/pyfstream.h: In member function ‘virtual int pyinbuf::underflow()’:
+/Users/johnw/src/ledger/src/python/pyfstream.h: In member function ‘virtual int pyoutbuf::overflow(int)’:
+/Users/johnw/src/ledger/src/python/pyfstream.h: In member function ‘virtual std::streamsize pyoutbuf::xsputn(const char*, std::streamsize)’:
+/Users/johnw/src/ledger/src/python/pyfstream.h:138: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/pyfstream.h:38: warning:   but does not override ‘pyoutbuf(const pyoutbuf&)’
+/Users/johnw/src/ledger/src/python/pyfstream.h:38: warning:   or ‘operator=(const pyoutbuf&)’
+/Users/johnw/src/ledger/src/python/pyfstream.h:38: warning: ‘class pyoutbuf’ has pointer data members
+/Users/johnw/src/ledger/src/python/pyfstream.h:52: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/pyfstream.h:64: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/pyfstream.h:83: warning:   but does not override ‘pyinbuf(const pyinbuf&)’
+/Users/johnw/src/ledger/src/python/pyfstream.h:83: warning:   or ‘operator=(const pyinbuf&)’
+/Users/johnw/src/ledger/src/python/pyfstream.h:83: warning: ‘class pyinbuf’ has pointer data members
+/Users/johnw/src/ledger/src/python/pyinterp.cc: In member function ‘virtual ledger::value_t ledger::python_interpreter_t::functor_t::operator()(ledger::xml::xpath_t::call_scope_t&)’:
+/Users/johnw/src/ledger/src/python/pyinterp.cc:198: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/pyinterp.h:77: warning: unused parameter ‘name’
+/Users/johnw/src/ledger/src/python/pyutils.h: In static member function ‘static void register_optional_to_python<T>::optional_from_python::construct(PyObject*, boost::python::converter::rvalue_from_python_stage1_data*)’:
+/Users/johnw/src/ledger/src/python/pyutils.h:105:   instantiated from ‘register_optional_to_python<T>::register_optional_to_python() [with T = ledger::amount_t]’
+/Users/johnw/src/ledger/src/python/pyutils.h:105:   instantiated from ‘register_optional_to_python<T>::register_optional_to_python() [with T = ledger::moment_t]’
+/Users/johnw/src/ledger/src/python/pyutils.h:41:   instantiated from ‘object_from_python<T, TfromPy>::object_from_python() [with T = boost::optional<ledger::amount_t>, TfromPy = register_optional_to_python<ledger::amount_t>::optional_from_python]’
+/Users/johnw/src/ledger/src/python/pyutils.h:41:   instantiated from ‘object_from_python<T, TfromPy>::object_from_python() [with T = boost::optional<ledger::moment_t>, TfromPy = register_optional_to_python<ledger::moment_t>::optional_from_python]’
+/Users/johnw/src/ledger/src/python/pyutils.h:52:   instantiated from ‘register_python_conversion<T, TtoPy, TfromPy>::register_python_conversion() [with T = boost::optional<ledger::amount_t>, TtoPy = register_optional_to_python<ledger::amount_t>::optional_to_python, TfromPy = register_optional_to_python<ledger::amount_t>::optional_from_python]’
+/Users/johnw/src/ledger/src/python/pyutils.h:52:   instantiated from ‘register_python_conversion<T, TtoPy, TfromPy>::register_python_conversion() [with T = boost::optional<ledger::moment_t>, TtoPy = register_optional_to_python<ledger::moment_t>::optional_to_python, TfromPy = register_optional_to_python<ledger::moment_t>::optional_from_python]’
+/Users/johnw/src/ledger/src/python/pyutils.h:93: warning: use of old-style cast
+/Users/johnw/src/ledger/src/python/pyutils.h:96:   instantiated from ‘static void register_optional_to_python<T>::optional_from_python::construct(PyObject*, boost::python::converter::rvalue_from_python_stage1_data*) [with T = ledger::moment_t]’
+/Users/johnw/src/ledger/src/python/pyutils.h:98:   instantiated from ‘static void register_optional_to_python<T>::optional_from_python::construct(PyObject*, boost::python::converter::rvalue_from_python_stage1_data*) [with T = ledger::amount_t]’
+/Users/johnw/src/ledger/src/python/pyutils.h:98:   instantiated from ‘static void register_optional_to_python<T>::optional_from_python::construct(PyObject*, boost::python::converter::rvalue_from_python_stage1_data*) [with T = ledger::moment_t]’
+/Users/johnw/src/ledger/src/traversal/transform.h:100: warning:   by ‘virtual ledger::value_t ledger::merge_transform::operator()(ledger::xml::xpath_t::call_scope_t&)’
+/Users/johnw/src/ledger/src/traversal/transform.h:110: warning:   by ‘virtual ledger::value_t ledger::combine_transform::operator()(ledger::xml::xpath_t::call_scope_t&)’
+/Users/johnw/src/ledger/src/traversal/transform.h:117: warning:   by ‘virtual ledger::value_t ledger::group_transform::operator()(ledger::xml::xpath_t::call_scope_t&)’
+/Users/johnw/src/ledger/src/traversal/transform.h:126: warning:   by ‘virtual ledger::value_t ledger::collapse_transform::operator()(ledger::xml::xpath_t::call_scope_t&)’
+/Users/johnw/src/ledger/src/traversal/transform.h:134: warning:   by ‘virtual ledger::value_t ledger::subtotal_transform::operator()(ledger::xml::xpath_t::call_scope_t&)’
+/Users/johnw/src/ledger/src/traversal/transform.h:42: warning: ‘virtual ledger::value_t ledger::transform_t::operator()(ledger::xml::xpath_t::scope_nt_node_t&>&)’:
+/Users/johnw/src/ledger/src/traversal/transform.h:42: warning: ‘virtual ledger::value_t ledger::transform_t::operator()(ledger::xml::xpath_t::scope_t&)’ was hidden
+/Users/johnw/src/ledger/src/traversal/transform.h:48: warning:   by ‘virtual ledger::value_t ledger::check_transform::operator()(ledger::xml::xpath_t::call_scope_t&)’
+/Users/johnw/src/ledger/src/traversal/transform.h:54: warning:   by ‘virtual ledger::value_t ledger::accounts_transform::operator()(ledger::xml::xpath_t::call_scope_t&)’
+/Users/johnw/src/ledger/src/traversal/transform.h:61: warning:   by ‘virtual ledger::value_t ledger::compact_transform::operator()(ledger::xml::xpath_t::call_scope_t&)’
+/Users/johnw/src/ledger/src/traversal/transform.h:67: warning:   by ‘virtual ledger::value_t ledger::clean_transform::operator()(ledger::xml::xpath_t::call_scope_t&)’
+/Users/johnw/src/ledger/src/traversal/transform.h:73: warning:   by ‘virtual ledger::value_t ledger::entries_transform::operator()(ledger::xml::xpath_t::call_scope_t&)’
+/Users/johnw/src/ledger/src/traversal/transform.h:82: warning:   by ‘virtual ledger::value_t ledger::optimize_transform::operator()(ledger::xml::xpath_t::call_scope_t&)’
+/Users/johnw/src/ledger/src/traversal/transform.h:92: warning:   by ‘virtual ledger::value_t ledger::split_transform::operator()(ledger::xml::xpath_t::call_scope_t&)’
+/Users/johnw/src/ledger/src/traversal/xpath.cc: In member function ‘bool ledger::xml::xpath_t::op_t::print(std::ostream&, ledger::xml::xpath_t::op_t::print_context_t&) const’:
+/Users/johnw/src/ledger/src/traversal/xpath.cc: In member function ‘ledger::value_t ledger::xml::xpath_t::op_t::calc(ledger::xml::xpath_t::scope_t&)’:
+/Users/johnw/src/ledger/src/traversal/xpath.cc: In member function ‘void ledger::xml::xpath_t::token_t::next(std::istream&, uint_least8_t)’:
+/Users/johnw/src/ledger/src/traversal/xpath.cc: In static member function ‘static void ledger::xml::xpath_t::token_t::unexpected(char, char)’:
+/Users/johnw/src/ledger/src/traversal/xpath.cc:1125: warning: comparison of unsigned expression >= 0 is always true
+/Users/johnw/src/ledger/src/traversal/xpath.cc:1288: warning: use of old-style cast
+/Users/johnw/src/ledger/src/traversal/xpath.cc:1558: warning: use of old-style cast
+/Users/johnw/src/ledger/src/traversal/xpath.cc:337: warning: use of old-style cast
+/Users/johnw/src/ledger/src/traversal/xpath.cc:394: warning: use of old-style cast
+/Users/johnw/src/ledger/src/traversal/xpath.h:109: warning:   but does not override ‘ledger::xml::xpath_t::child_scope_t(const ledger::xml::xpath_t::child_scope_t&)’
+/Users/johnw/src/ledger/src/traversal/xpath.h:109: warning:   or ‘operator=(const ledger::xml::xpath_t::child_scope_t&)’
+/Users/johnw/src/ledger/src/traversal/xpath.h:109: warning: ‘class ledger::xml::xpath_t::child_scope_t’ has pointer data members
+/Users/johnw/src/ledger/src/traversal/xpath.h:165: warning: ‘ledger::xml::xpath_t::symbol_scope_t::symbols’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/traversal/xpath.h:169: warning: ‘ledger::xml::xpath_t::symbol_scope_t::symbols’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/traversal/xpath.h:189: warning: ‘ledger::xml::xpath_t::call_scope_t::args’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/traversal/xpath.h:318: warning: ‘ledger::xml::xpath_t::token_t::value’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/traversal/xpath.h:321: warning: ‘ledger::xml::xpath_t::token_t::kind’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/traversal/xpath.h:321: warning: ‘ledger::xml::xpath_t::token_t::length’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/traversal/xpath.h:321: warning: ‘ledger::xml::xpath_t::token_t::value’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/traversal/xpath.h:371: warning: ‘ledger::xml::xpath_t::path_iterator_t::sequence’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/traversal/xpath.h:452: warning: ‘ledger::xml::xpath_t::op_t::data’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/traversal/xpath.h:452: warning: ‘ledger::xml::xpath_t::op_t::left_’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/traversal/xpath.h:723: warning: ‘ledger::xml::xpath_t::expr’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/traversal/xpath.h:726: warning: ‘ledger::xml::xpath_t::expr’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/traversal/xpath.h:726: warning: ‘ledger::xml::xpath_t::flags’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/traversal/xpath.h:730: warning: ‘ledger::xml::xpath_t::expr’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/traversal/xpath.h:736: warning: ‘ledger::xml::xpath_t::expr’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/utility/binary.cc: In function ‘void ledger::binary::read_bool(const char*&, bool&)’:
+/Users/johnw/src/ledger/src/utility/binary.cc: In function ‘void ledger::binary::read_bool(std::istream&, bool&)’:
+/Users/johnw/src/ledger/src/utility/binary.cc: In function ‘void ledger::binary::write_bool(std::ostream&, bool)’:
+/Users/johnw/src/ledger/src/utility/binary.cc:133: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/binary.cc:41: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/binary.cc:49: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/binary.h: In function ‘void ledger::binary::read_long(const char*&, T&)’:
+/Users/johnw/src/ledger/src/utility/binary.h: In function ‘void ledger::binary::read_long(std::istream&, T&)’:
+/Users/johnw/src/ledger/src/utility/binary.h: In function ‘void ledger::binary::read_number(const char*&, T&)’:
+/Users/johnw/src/ledger/src/utility/binary.h: In function ‘void ledger::binary::read_number(std::istream&, T&)’:
+/Users/johnw/src/ledger/src/utility/binary.h: In function ‘void ledger::binary::read_number_nocheck(const char*&, T&)’:
+/Users/johnw/src/ledger/src/utility/binary.h: In function ‘void ledger::binary::read_number_nocheck(std::istream&, T&)’:
+/Users/johnw/src/ledger/src/utility/binary.h: In function ‘void ledger::binary::write_long(std::ostream&, T)’:
+/Users/johnw/src/ledger/src/utility/binary.h: In function ‘void ledger::binary::write_number(std::ostream&, T)’:
+/Users/johnw/src/ledger/src/utility/binary.h: In function ‘void ledger::binary::write_number_nocheck(std::ostream&, T)’:
+/Users/johnw/src/ledger/src/utility/binary.h:127: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/binary.h:131: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/binary.h:135: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/binary.h:139: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/binary.h:156: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/binary.h:160: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/binary.h:164: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/binary.h:168: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/binary.h:206: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/binary.h:219: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/binary.h:231: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/binary.h:233: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/binary.h:235: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/binary.h:241: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/binary.h:245: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/binary.h:249: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/binary.h:253: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/binary.h:40: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/binary.h:45: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/binary.h:74: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/binary.h:81: warning: use of old-style cast
+/Users/johnw/src/ledger/src/utility/context.h:65: warning: ‘ledger::file_context::colnum_beg’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/utility/context.h:65: warning: ‘ledger::file_context::colnum_end’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/utility/mask.cc:36: warning: ‘ledger::mask_t::expr’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/src/utility/pushvar.h:201:   instantiated from ‘push_variable<T>::push_variable(T&, const T&) [with T = boost::optional<ledger::path>]’
+/Users/johnw/src/ledger/src[with T = ledger::value_t::type_t]’
+/Users/johnw/src/ledger/tests/numerics/t_amount.h:57: warning: ‘AmountTestCase::session’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/tests/numerics/t_balance.h:17: warning: ‘BalanceTestCase::session’ should be initialized in the member initialization list
+/Users/johnw/src/ledger/tests/numerics/t_commodity.h:20: warning: ‘CommodityTestCase::session’ should be initialized in the member initialization list

@@ -1,0 +1,70 @@
+#    -*- mode: org -*-
+
+
+Archived entries from file /Users/johnw/src/ledger/pending/todo.txt
+
+
+* DONE Write a better value aligner for ledger-mode
+  SCHEDULED: <2007-08-18 Sat> ARCHIVED: <2007-08-18 Sat> ARCHIVED: <2007-08-20 Mon>
+    - State "DONE"       [2007-08-18 Sat 21:10] \\
+      I have a version called `ledger-align-amounts' which worked for my entire
+      ledger file.
+  [2007-08-17 Fri 23:22] [[file:~/Documents/Accounts/ledger.dat::Assets%20E%20Trade%20Savings%2012%20000%2000][file:~/Documents/Accounts/ledger.dat::Assets E Trade Savings 12 000 00]]
+
+* DONE E-mails from Ledger Trac refer to localhost
+  SCHEDULED: <2007-08-25 Sat> ARCHIVED: <2007-08-25 Sat>
+    - State "DONE"       [2007-08-23 Thu 02:12] \\
+      The last e-mail I received had the correct hostname.
+  I just need to test now that things are working.
+
+* DONE If I clear an automated transaction's entry, the flag does not carry
+  ARCHIVED: <2007-08-25 Sat>
+    - State "DONE"       [2007-08-13 Mon 19:29] \\
+      Fixed the source and checked in to 2.6.1.
+  [2007-08-12 Sun 17:01] [[file:~/Documents/Accounts/ledger.dat::Liabilities%20Huququ%20llah%200%2019][file:~/Documents/Accounts/ledger.dat::Liabilities Huququ llah 0 19]]
+
+* DONE [#C] Remove spam ticket on Ledger Trac, and disable anonymous new tickets
+   SCHEDULED: <2007-08-23 Thu> ARCHIVED: <2007-08-25 Sat>
+   - State "DONE"       [2007-08-23 Thu 16:08] \\
+     I removed the ability for anonymous users to create new tickets.
+   [2007-08-18 Sat] http://newartisans.com/ledger/ticket/24
+
+
+#+STARTUP: content
+#+STARTUP: lognotestate
+#+SEQ_TODO: TODO STARTED WAITING DELEGATED | DONE DEFERRED CANCELLED
+#+LINK: ledger http://newartisans.com/ledger/ticket/%s
+
+* DONE [#A] Daily budgeting in Ledger 2.6.1 does not work at all
+  SCHEDULED: <2007-08-26 Sun> ARCHIVED: <2007-08-26 Sun>
+  - State "DONE"       [2007-08-26 Sun 03:16] \\
+    This was fixed by the bug fix for daily reporting.
+  [2007-08-20 Mon]
+
+* DONE [#B] Using the daily keyword for a ledger register report does not work
+  SCHEDULED: <2007-08-26 Sun> ARCHIVED: <2007-08-26 Sun>
+  - State "DONE"       [2007-08-26 Sun 03:16] \\
+    This was fixed by correcting an error in datetime.cc where incrementing an
+    interval by a day was actually doing it by a month.
+  The following command only outputs monthly data, not daily data:
+    ledger -p "daily from 2007/08/16" -s -l '! e/:USA:/' reg ^exp
+  [2007-08-23 Thu]
+
+* DONE [#B] The 'bal' command is giving me an assertion now
+  SCHEDULED: <2007-08-26 Sun> ARCHIVED: <2007-08-26 Sun>
+  - State "DONE"       [2007-08-26 Sun 03:01] \\
+    Fixed this by changed the following code in amount.cc:
+      amount_t val = leftprice - rightprice;
+      if (val)
+    to the following:
+      int diff = leftprice.compare(rightprice);
+      if (diff)
+  [2007-08-20 Mon]
+
+* DONE test
+  ARCHIVED: <2007-08-29 Wed>
+
+#+STARTUP: content
+#+STARTUP: lognotestate
+#+SEQ_TODO: TODO STARTED WAITING DELEGATED APPT | DONE DEFERRED CANCELLED
+#+LINK: ticket http://newartisans.com/ledger/ticket/%s

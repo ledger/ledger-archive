@@ -1,0 +1,449 @@
+LEDGER PROJECT  -*- mode: org; fill-column: 78 -*-
+
+#+CATEGORY: Ledger
+
+* 2.6.1
+** TODO [#B] Install patches for Ledger 2.6 from Simon Michael
+   SCHEDULED: <2007-10-17 Wed>
+   Patch 1: [[nnml://op.ty0v0uqfhse33c@dynabook.joyful.com][Re: ledger 2.6 questions]]
+   Patch 2: [[nnml://op.ty0wiafwhse33c@dynabook.joyful.com][ledger patch: hourstoday]]
+   Patch 4 (supersedes 3): [[nnml://op.ty0y70lrhse33c@dynabook.joyful.com][ledger patch: emacs utils fix]]
+   [2007-09-27 Thu]
+** TODO [#B] ledger -MA doesn't give a monthly report if some months have no transactions
+   SCHEDULED: <2007-10-17 Wed>
+   [2007-09-17 Mon]
+** TODO [#B] Omari Norman has volunteered to run Buildbot on Ubuntu
+   SCHEDULED: <2007-10-17 Wed>
+   [2007-09-27 Thu] [[nnml://20070925095226.GA29472@cameron][Re: getting 2.6 to build; no captchca]]
+** TODO [#B] Create build processes for packaging ledger [0/6]
+   SCHEDULED: <2007-10-17 Wed>
+   - [ ] .tar.gz
+   - [ ] .tar.bz2
+   - [ ] .rpm
+   - [ ] .deb
+   - [ ] .dmg
+   - [ ] .zip (Windows)
+   [2007-09-16 Sun]
+** TODO [#B] There is no icon on the Ledger trac page
+   SCHEDULED: <2007-10-18 Thu>
+   [2007-09-16 Sun]
+** TODO [#B] Add support for comments (notes) on entire entries
+   SCHEDULED: <2007-10-17 Wed>
+   These get scanned for tags or regexp match when scanning entries using e//.
+** TODO [#B] Reconciling is broken again; I need a way to verify Emacs output
+   SCHEDULED: <2007-10-17 Wed>
+   [2007-09-22 Sat]
+** TODO [#B] When doing a daily budget report, there is no budgeting entry for "today"
+   SCHEDULED: <2007-10-17 Wed>
+   [2007-08-29 Wed]
+** TODO [#A] My "bal" command is broken again
+   SCHEDULED: <2007-10-24 Wed>
+   ~/Reference/Computing/Systems/Linux $ bal
+           $63,848.34
+            EC 450.05  Assets
+   Error: Cannot compare amounts with different commodities: EC and $
+   [2007-08-29 Wed]
+** TODO [#B] Ledger formats UTF-8 strings incorrectly
+   SCHEDULED: <2007-10-17 Wed>
+   The report 'ledger --tail 20 reg nrl:checking' has errors in the tabulation
+   because of the width of UTF-8 characters that are larger than 8-bit.
+   [2007-08-24 Fri]
+** TODO [#B] Attempting to make a negative cost transaction fails
+   SCHEDULED: <2007-10-17 Wed>
+   The following gets "transaction's cost cannot be negative":
+     Liabilities:NRL:MasterCard           $-62.26 @@ EC -165.69
+   But this gets "commodity's price cannot be negative":
+     Liabilities:NRL:MasterCard           $-62.26 @@ EC 165.69
+   [2007-08-20 Mon]
+** TODO [#B] Need a flag for sorting the amounts in a -M report in ledger
+   [2007-08-12 Sun 16:02]
+** STARTED [#A] Marking a transaction cleared may delete text in ledger-mode
+   SCHEDULED: <2007-10-23 Tue>
+   - State "STARTED"    [2007-08-23 Thu 23:15] \\
+     I started the groundwork for this, now I just have to add code to insert
+     whitespace if needed to keep each transaction valid.
+   [2007-08-12 Sun 16:51] [[file:~/Documents/Accounts/ledger.dat::Income%20Interest][file:~/Documents/Accounts/ledger.dat::Income Interest]]
+** TODO [#A] Bug with date ranges (2.6) [Data for this and the following are in Trac]
+** TODO [#B] Remove bogus reference to Emacs in project documentation (2.6)
+** TODO [#B] Problems with CVS version under Debian (2.5)
+** TODO Problem with capital gains report (2.6)
+** TODO Problem with basis report
+** TODO Bug in ledger equity output (2.4.1)
+** TODO Budgeting oddness
+** TODO Periodic budgeting problem when Yxxxx is used
+** TODO Command fails to report monthly averages (2.6)
+** TODO Command results in assertion failure (2.6)
+** TODO Command does not sort correctly (2.6)
+** TODO Weekly register report is completely broken (2.6)
+** TODO Forecasting command doesn't do any forecasting
+** TODO Balance command gets the sorting wrong
+** TODO Monthly register command displays nothing
+** TODO Trouble reading an ofx file (2.4.1)
+** TODO Reconciling doesn't work in ledger.el (2.5)
+** TODO Forecasting goes too far (2.4.1)
+** TODO Bug in showing budget balance
+** TODO Error when running my 'bal' script (2.6)
+** TODO Problem with piping input to ledger
+** TODO Trouble reading an ofx file (2.4.1)
+
+
+* Tasks
+** TODO [#B] Create a Wiki page titled "Who's using Ledger?"
+   SCHEDULED: <2007-10-18 Thu>
+   [2007-10-10 Wed]
+** TODO [#B] Allow forecasting from a specific date
+   SCHEDULED: <2007-10-20 Sat>
+   This would make it possible to see expected vs. actual cash flows, for
+   example, if the date chosen is before the end of actual transactions.  Kind
+   of like a modified version of budgeting.
+   [2007-10-10 Wed] http://forums.newartisans.com//viewtopic.php?p=23#23
+** DONE [#A] The Ledger forums are currently broken; one user cannot post
+   SCHEDULED: <2007-10-05 Fri>
+   - State "DONE"       [2007-10-05 Fri 18:38] \\
+     There were sequences in the database still owned by 'johnw' instead of
+     'phpbb2_db_admin'.
+   [2007-10-03 Wed] [[nnml:u1wcc40m6.fsf@villingen.facilitatedsystems.com][Ledger forums bug and my posting]]
+** TODO Rewrite the concept of error contexts
+** TODO Simplify the #include hierarchy!
+** TODO Redesign logging to follow log4j's usage pattern
+** TODO Performance analysis
+Examine the performance implications of using std::vector instead of
+std::list, when we only intend to run read-only.
+** TODO Add more asserts
+** TODO Add more error checks
+** TODO Add more exception types
+** TODO Remove global commodities map
+Create a commodity_pool, which is linked to a journal (and which every
+amount has a pointer to)
+** TODO Clear out all #if 0 and jww commented sections
+** TODO Optimize parsing of transaction amounts
+** TODO Add license headers to every file
+* Bugs
+** TODO BUG: The operators in valexpr.cc shouldn't just assert, but if
+somebody says "T&", it should give a syntax error.
+** TODO Remove dependency on the following globals:
+amount.cc: temp, divisor, true_value, commodity static members
+binary.cc: several
+config.cc: config_options
+datetime.cc: now, formats
+valexpr.cc: amount_expr, total_expr
+** TODO Document inline math in the .texi file.
+** TODO Restructure sessions:
+globals_t (global options settings)
+session_t ->
+  journal_t*
+report_t ->
+  repitem_t
+  transform_t*
+  session_t*
+Create two new repitem_t kinds: REPORT, JOURNAL
+** TODO Set the beginning and ending line/position for entries that are in
+other files types: OFX.
+** TODO Change ledger.el to intelligently handle inserting simplified
+entries using the basket account.
+** TODO Add to documentation:
+- --write-hdr-format
+- --write-xact-format
+- --reconcile BALANCE
+- --reconcile-date DATE
+- the way currencies work (as far as determining whether an amount
+  is American or European).
+** TODO Create a report to show AAPY, indicating the performance of
+investments, money market accounts, etc.
+** TODO If a file !include's other files, it cannot be reconciled, since
+hitting space will not mark the right entry.
+** TODO How do I solve the fact that individual transactions cannot be
+marked "cleared"?  This causes troubles when multiple accounts are
+reconciled that involve common transactions.
+** TODO Add to the commodity flags in the XML data whether it should never
+be downloaded or not (N).
+** TODO In the "pricesdb" report, output commodity conversions and "N"
+commands.
+** TODO In the equity report, if the "collapse" option is used, output only
+one entry.  Otherwise, output an entry for every top-level account.
+** TODO Have -T and -t set the expression template, so that # may be used to
+refer to whatever the previous value (set by other options) was
+** TODO Finish implementing QIF parser, and document its use
+** TODO Get rid of --print-format, and have print use hdr-format and
+xact-format, which output uses.
+** TODO Add entry comments (" ; TEXT" after the payee), and then add
+"effective dates", which are [[DATE]] embedded in either an entry or
+transaction comment.  -N reports in terms of effective date rather
+than real dates
+** TODO Commenting, code review and API documentation
+** TODO Write a C API if the C++ API is documented
+** TODO Performance in forecasting would be weak with a lot of period xacts.
+What happens to performance with lots of accounts, of commodities?
+** TODO Normalize automated transactions, so that there is no functional
+difference between the binary and textual data formats; this is
+needed for the GUI so that if entries are added or changed, the
+auto_entries are re-applied to that entry
+** TODO Create a session_t object, which encapsulates everything about a
+current ledger session.  This will allow for an interpretor loop,
+and use of ledger from the GUI.
+** TODO Allow for quicker reporting commands in ledger.el, like C-c C-b for
+running the balance command
+** TODO Tie-in with beancounter and quantlib
+** TODO `derive_new_entry' shouldn't add accounts to the journal, but just
+create them as it needs them
+** TODO Should the handling of cache files be a separate layer on top of
+binary.cc?
+** TODO Support --read-format and --write-format for specifying read/write
+formats explicitly; the defaults would be "--read-format auto" and
+"--write-format text".
+** TODO Design a good reconciler, which should:
+*** Shows uncleared transactions, and also those cleared a few days
+    before the least recent uncleared, and all since the least recent
+    uncleared.
+*** Allow one to easily mark the transactions cleared/uncleared, and
+    displays a running balance of the statement balance, cleared
+    balance, actual account balance, and the difference among them.
+
+    Allows for reordering and redating of transactions to match what is
+    seen on the statement.
+*** Allows for quick and easy addition of transactions that were missed,
+    deletion of transactions incorrectly added
+
+    Allow for changing the account of a transaction which had been
+    assigned to the wrong account.
+*** Should have a very intuitive and plain interface, and be usable with
+    a minimum of clicks and keypresses.
+*** Should support postponing completion of the activity until a later
+    time.
+*** Should allow for finding the transactions which amount to a
+    discrepancy.  This could become an involved algorithm, but if the
+    balance is off by $18.52, it should be able to determine which
+    transactions were not cleared, and which incorrectly cleared, that
+    yielded the incorrect amount.
+
+    Something that can be made transparent, in case the statement is an
+    electronic document being viewed underneath the reconciling window.
+** TODO An algorithm which attempts to auto-reconcile, based on the
+relative uniqueness of numerical values in any given statement -- which
+then presents the transactions it thinks comprise those found in the
+statement.  Would work great for credit cards, but perhaps not so well for
+bank accounts.  As soon as auto-reconciling works (it wouldn't until all
+the transactions from the statement are available), it would propose the
+completed set to the user.
+** TODO Some form of lot identification to associate the sold parcel with a
+   bought parcel.  (This might also allow you to itemise invoices on a
+   monthly statement.)  My suggestion was an optional field to the
+   right of the amount in a split which would link back to the
+   reference number (but someone else may have a better idea) ie
+
+     2005/01/01  (BUY#001) Purchase stocks
+        Assets:Brokerage:APPL   50 APPL @ $30.00
+        ...
+
+     2005/02/01  (SELL#002) Sell stocks
+        Assets:Stocks:APPL    -50 @ $30.00 (BUY#001)
+        ...
+*** Report on closed or open lots. A closed lot is one that balances to
+    zero- in case of commodities there are two balances, the commodity
+    and the basis.
+*** 'print' only transactions involving a specified commodity (maybe
+    ledger can do this already but I couldnt see how).
+** TODO A few changes for the textual parser:
+*** Ignore any line like /^\s*;/ as a comment -even in the middle of a
+    transaction
+*** Treat -$300.00 the same as $-300.00 : I found myself making this
+    mistake frequently.
+*** Print the out offending transaction and the 'out of balance' amount
+    in the 'unbalanced transaction' error message.
+*** It would be nice if the 'entry' command could be modified to assume
+    the amount is the same as last time if you dont supply it.  It also
+    doesn't seem to reproduce multiple-split transactions either -- it
+    seems you only get the first split line.
+** TODO Odditing in name of XML namespaces in Ledger
+[[nnml:20060304.181355.96677625.arb46@cornell.edu][e-mail]] one
+[[nnml:20060802015747.27838.qmail@web30706.mail.mud.yahoo.com][e-mail]] two
+** TODO Value expression descriptions
+When parsing a value expression, allowing keeping a description tag, so
+that when an exception is fired the user can be told where the value
+expression came from.
+** TODO Make the balance report separator bar a format code
+So that it can be widened when the balance is widened
+** TODO When reporting the unbalanced remainder, round it
+This is so that it shows what ledger is really thinking.
+** TODO ledger -Mn
+Is not the same as: ledger -M -n
+** TODO Another problem with XML output
+[[nnml:20060918231625.11184.qmail@web30708.mail.mud.yahoo.com][e-mail]]
+** TODO Crash reading .timelog file
+2.6b aborts if the last entry is the timelog is an "in" event.
+** TODO DOS format line endings are fooling the parser
+The \r\n ending is having only the \n stripped, making the \r appear as
+part of the filename when doing a !include.
+** TODO In ledger.el, fix toggle-current-transaction
+When all transactions have been cleared, the marks should be wiped and then
+ledger-toggle-current-entry called, rather than doing the entry clearing
+itself.
+** TODO Problem reading Russian prices file
+Use the file in pending/bug.100 as the prices.db file.
+** TODO Emacs reconciling is currently broken
+** TODO Problems parsing an entry
+See pending/New Artisans LLC // View topic - Ledger doesn't like my transaction/index.html
+** TODO More issues with price file parsing
+See pending/New Artisans LLC // View topic - Problem with prices.db file/index.html
+** TODO Bug in the textual parser
+** TODO --begin and --end not working correctly
+** TODO -j is not working with -E
+See HTML in pending
+** TODO Need to internationalize error messages
+** TODO Need to strip \r from \r\n line endings
+** TODO Add UTF-8 support for input files, commands and reports
+** TODO Change all the source code to utf-8
+** TODO Preserve XML comments
+** TODO Use &lt; when writing out XML, instead of <
+This is significant when a transaction's amount was calculated from an expression:
+  <transaction>
+    <amount expr="1 + 2">
+      3
+    </amount>
+  </transaction>
+** TODO Give an error if --input-date-format contains a space (or should it?)
+** TODO Add item sequence list to journal_t
+   This could be as simple as a series of numbers, to indicate which item from
+   each list occurred in a series.
+
+   This is necessary for recording value expressions, since transactions may
+   occur between them, with definitions changing, ex:
+
+     DEF foo=10
+     TRANS1 uses foo
+     DEF foo=20
+     TRANS2 uses the new foo
+
+   So, as a binary journal is being read in, we keep a list of value
+   expressions, and "trigger" them at the appropriate time while reading the
+   transactions.
+* Features
+** TODO Add complete calculation history in Ledger
+   This means that amounts need to point back to the transactions they came
+   from, and every math operation will result in a value which keeps a list of
+   the values it came from, etc.
+   [2007-09-22 Sat]
+** TODO Support for exceptions to interval_t
+For example, "monthly except June".
+** TODO Value expressions for getting at the lot date
+For example: lotdate, lotdateof(x)
+** TODO Annotations should allow for HH:MM:SS
+And also datetime should display this if it's there (but not if it's
+midnight).
+
+To implement this:
+
+Add a parsing option that if, before the code, there is a string fitting
+HH:MM:SS, then it is taken to be a time value.
+
+This will require making the parsing of date_t and datetime_t flexible and
+adaptive (and stream-based).
+** TODO Command output-xml
+As a corollary to the output command, have an output-xml command, which
+writes a complete Ledger file (including all automated entries, etc) to an
+XML file.
+** TODO read_xml and write_xml methods for values
+** TODO Option --transform VALEXPR
+Which is a handler that applies valexpr to each transaction and outputs a
+temporary transaction with that amount -- or is this just the same as -t?
+** TODO Option --args-only
+Have --args-only, which causes Ledger to ignore the environment or any
+initialization files.  Use this in the test scripts.  It will require
+making a standard price database.
+** TODO Option --bold-if
+Which will bold the whole transaction line if it matches the given
+predicate
+** TODO Support multiple -f options
+So that add-in report files can be specified
+** TODO Make ^ be a power operator
+So that 0.234 * 10^7 notation is possible.
+** TODO Request for unique payee list
+nnml:87k68rutji.fsf@kea-dev-lnx-lt.intruvert.com
+** TODO Make commodity_t::qualified_symbol a virtual function
+Since regular commodities have the exact same symbol name as their base
+commodity.
+** TODO Make --last and --first be synonyms for --tail and --head
+** TODO Make --cost a synonym for --basis
+** TODO Allow column width to be specified
+This option would tailor the width of the register report, rather than only
+having a standard and wide option.
+** TODO "Add a "scramble" command"
+The purpose of this command is to anonymize the user's data so that they
+can submit a bug report without revealing any sensitive information about
+themselves.
+** TODO Have ledger.el warn if the ledger version is too old
+** TODO Enable the parsing of XML on standard input
+** TODO Allow for data file assertions
+   A use for these would be after reconciling the bank balance, you want to
+   assert that the cleared balance on that day is a given amount and if it
+   ever changes there should be an error.
+* Docs
+** TODO A need for some extensive examples with commentary :DOCS:
+** TODO Extended lot indentification support	:DOCS:
+nnml:m2veuvq0al.fsf@newartisans.com
+** TODO New reporting options: --descend and --descend-if :DOCS:
+nnml:m2slpojqjc.fsf@newartisans.com
+** TODO "Ledger example: building a better "du"" :DOCS:
+nnml:m2odzwxupz.fsf@newartisans.com
+** TODO Handling funds				:DOCS:
+nnml:m2fylicj1e.fsf@Majdhub.local
+** TODO Another value expression change		:DOCS:
+nnml:m2fyle3zdy.fsf@newartisans.com
+** TODO --price option in lot_sales branch	:DOCS:
+nnml:m24q2rwrym.fsf_-_@newartisans.com
+nnml:m2k6bl3vr3.fsf@newartisans.com
+** TODO Using Ledger as a scientific analysis tool :DOCS:
+** TODO Using Ledger to track inventory		:DOCS:
+   2007/03/01 Tire purchase
+     Assets:Tire Inventory                2 tires @ $10
+     Assets:Checking                      $-20
+
+   2007/03/05 (Order#1) Gus
+     Liabilities:Accounts Payable:Gus     2 tires
+     Income:Tire Sales                    $-40
+     Assets:Tire Inventory                -2 tires {$10} @ $30
+
+   2007/04/01 (Order#1) Gus
+     Accounts:Gus                         2 tires
+     Liabilities:Accounts Payable:Gus[/code]
+
+   What these three entries say is this
+
+   1) That on March 1 you bought two tires for your inventory, from Checking,
+      at $10 a pop.
+
+   2) That on March 5, Gus ordered those two tires for $30 a piece, netting
+      you profit income of $40.  The two tires are now pending delivery to
+      Gus.
+
+   3) That on April 1, you sent the tires to Gus.
+
+   How do you do effective reporting with this?
+
+   Well:
+
+   - ledger bal accounts will show how many tires you've sold.
+
+   - ledger -V bal accounts will show how money you've made from customers on
+     tire sales alone.  ledger bal income:tire will show the same thing, but
+     only in money figures (i.e., no -V is necessary).
+
+   - ledger bal 'liab:.*payable' will show how many tires you have yet to
+     ship.
+
+   - ledger bal assets:tire will show how many tires you have in stock waiting
+     to be sold.
+
+   - ledger --lot-prices bal assets:tire will show your current inventory, and
+     what you paid for each group of tires in that inventory.
+* ledger.el
+** TODO "Use of ledger.el with various invalid "ledger" binaries (and none)"
+** TODO Partial and full clearing of an entry
+** TODO Reconcile mode
+
+
+#+STARTUP: content
+#+STARTUP: lognotestate
+#+SEQ_TODO: TODO STARTED WAITING DELEGATED APPT | DONE DEFERRED CANCELLED
+#+LINK: ticket http://newartisans.com/ledger/ticket/%s
+#+TAGS: DOCS(d)

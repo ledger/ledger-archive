@@ -1,0 +1,35 @@
+; -*- cl-ledger -*-
+
+= /^Expenses:Books/
+  (Liabilities:Taxes)             -0.10
+
+~ Monthly
+  Assets:Bank:Checking          $500.00
+  Income:Salary
+
+Y 2004
+
+05/01 * Checking balance
+  Assets:Bank:Checking        $1,000.00
+  Equity:Opening Balances
+
+05/01 * Investment balance
+  Assets:Brokerage              50 AAPL @ $30.00
+  Equity:Opening Balances
+
+05/14 * Pay day
+  Assets:Bank:Checking          $500.00 * 2  ; this is a comment
+  Income:Salary
+
+05/27 Book Store
+  Expenses:Books                 $20.00
+  Liabilities:MasterCard
+
+05/27 (100) Credit card company
+  Liabilities:MasterCard         $20.00
+  Assets:Bank:Checking
+
+05/29 Book Store
+  Expenses:Books                 $20.00
+  Liabilities:MasterCard
+

@@ -1,0 +1,33 @@
+#!/bin/sh
+
+TMPDIR=/tmp
+if [ -d /Volumes/RamDisk ]; then
+    TMPDIR=/Volumes/RamDisk
+fi
+
+rsync -Lav --delete \
+    --exclude="autom4te.cache/" \
+    --exclude=".libs/"	  \
+    --exclude="build/"	  \
+    --exclude="CVS/"	  \
+    --exclude="branches/" \
+    --exclude="*.[oa]"	  \
+    --exclude="*.l[oa]"   \
+    --exclude="*.so"	  \
+    --exclude="ledger"	  \
+    --exclude="*~"	  \
+    --exclude="_darcs/"   \
+    --exclude="scripts/"  \
+    ./ $TMPDIR/ledger-verify/
+
+cd $TMPDIR/ledger-verify
+#make all-clean > /dev/null 2>&1
+
+if ./acprep --safe-opt && make ledger; then
+   strip ledger
+
+   errors=0
+
+   nice -n 20 make verify
+   errors=`expr $errors + $?`
+fi

@@ -1,0 +1,35 @@
+#!/bin/sh
+
+DIR=.
+
+for file in $(ls -1 "$DIR"/*.gcno); do
+    BASE=$(echo $file | sed 's/.*-//')
+    if [ ! -f $BASE ]; then
+        ln -s $file $BASE
+    fi
+done
+
+for file in $(ls -1 "$DIR"/*.gcda); do
+    BASE=$(echo $file | sed 's/.*-//')
+    if [ ! -f $BASE ]; then
+	ln -s $file $BASE
+    fi
+done
+
+for file in $(ls -1 "$DIR"/*.gcda); do
+    BASE=$(echo $file | sed 's/.*-//' | sed 's/\.gcda//')
+    if [ -f ~/src/ledger/master/src/$BASE.cc ]; then
+        gcov -l ~/src/ledger/master/src/$BASE.cc >> summary.gcov
+    elif [ -f ~/src/ledger/master/tests/$BASE.cc ]; then
+        gcov -l ~/src/ledger/master/tests/$BASE.cc >> summary.gcov
+    elif [ -f ~/src/ledger/master/tests/*/$BASE.cc ]; then
+        gcov -l ~/src/ledger/master/tests/*/$BASE.cc >> summary.gcov
+    fi
+done
+
+if [ -d gcov_data ]; then
+    rm -fr gcov_data
+fi
+
+mkdir gcov_data
+mv *.gcov gcov_data
