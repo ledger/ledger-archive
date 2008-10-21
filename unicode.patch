@@ -1,0 +1,1025 @@
+--- a/python/pyinterp.cc
++++ b/python/pyinterp.cc
+--- a/python/pyinterp.h
++++ b/python/pyinterp.h
+--- a/src/account.cc
++++ b/src/account.cc
+--- a/src/amount.cc
++++ b/src/amount.cc
+@@ -241,45 +241,49 @@ void amount_t::_release()
+ 
+ 
+ #ifdef HAVE_GDTOA
++
+ namespace {
+   amount_t::precision_t convert_double(mpz_t dest, double val)
+   {
+     int	   decpt, sign;
+     char * buf = dtoa(val, 0, 0, &decpt, &sign, NULL);
+-    char * result;
+-    int	   len = std::strlen(buf);
++    int	   len = std_strlen(buf);
+ 
+-    if (decpt <= len) {
+-      decpt  = len - decpt;
+-      result = NULL;
+-    } else {
+-      // There were trailing zeros, which we have to put back on in
+-      // order to convert this buffer into an integer.
++    scoped_array<char> result;
+ 
+-      int zeroes = decpt - len;
+-      result = new char[len + zeroes + 1];
++    try {
++      if (decpt <= len) {
++	decpt  = len - decpt;
++      } else {
++	// There were trailing zeros, which we have to put back on in
++	// order to convert this buffer into an integer.
+ 
+-      std::strcpy(result, buf);
+-      int i;
+-      for (i = 0; i < zeroes; i++)
+-	result[len + i] = '0';
+-      result[len + i] = '\0';
++	int zeroes = decpt - len;
++	result.reset(new char[len + zeroes + 1]);
+ 
+-      decpt = (len - decpt) + zeroes;
+-    }
++	std_strcpy(result.get(), buf);
++	int i;
++	for (i = 0; i < zeroes; i++)
++	  result[len + i] = '0';
++	result[len + i] = '\0';
+ 
+-    if (sign) {
+-      char * newbuf = new char[std::strlen(result ? result : buf) + 2];
+-      newbuf[0] = '-';
+-      std::strcpy(&newbuf[1], result ? result : buf);
+-      mpz_set_str(dest, newbuf, 10);
+-      checked_array_delete(newbuf);
+-    } else {
+-      mpz_set_str(dest, result ? result : buf, 10);
+-    }
++	decpt = (len - decpt) + zeroes;
++      }
+ 
+-    if (result)
+-      checked_array_delete(result);
++      if (sign) {
++	scoped_array<char> newbuf
++	  (new char[std_strlen(result.get() ? result.get() : buf) + 2]);
++	newbuf[0] = '-';
++	std_strcpy(&newbuf[1], result.get() ? result.get() : buf);
++	mpz_set_str(dest, newbuf.get(), 10);
++      } else {
++	mpz_set_str(dest, result.get() ? result.get() : buf, 10);
++      }
++    }
++    catch (...) {
++      freedtoa(buf);
++      throw;
++    }
+     freedtoa(buf);
+ 
+     return decpt;
+@@ -292,6 +296,7 @@ amount_t::amount_t(const double val) : commodity_(NULL)
+   quantity = new bigint_t;
+   quantity->prec = convert_double(MPZ(quantity), val);
+ }
++
+ #endif
+ 
+ amount_t::amount_t(const unsigned long val) : commodity_(NULL)
+@@ -1011,10 +1016,10 @@ bool amount_t::parse(std::istream& in, flags_t flags)
+   // necessary.
+ 
+   if (last_comma != string::npos || last_period != string::npos) {
+-    int		 len = quant.length();
+-    char *	 buf = new char[len + 1];
+-    const char * p   = quant.c_str();
+-    char *	 t   = buf;
++    int		       len = quant.length();
++    scoped_array<char> buf(new char[len + 1]);
++    const char *       p   = quant.c_str();
++    char *	       t   = buf.get();
+ 
+     while (*p) {
+       if (*p == ',' || *p == '.')
+@@ -1023,8 +1028,7 @@ bool amount_t::parse(std::istream& in, flags_t flags)
+     }
+     *t = '\0';
+ 
+-    mpz_set_str(MPZ(quantity), buf, 10);
+-    checked_array_delete(buf);
++    mpz_set_str(MPZ(quantity), buf.get(), 10);
+   } else {
+     mpz_set_str(MPZ(quantity), quant.c_str(), 10);
+   }
+--- a/src/amount.h
++++ b/src/amount.h
+--- a/src/balance.cc
++++ b/src/balance.cc
+--- a/src/balance.h
++++ b/src/balance.h
+--- a/src/balpair.h
++++ b/src/balpair.h
+--- a/src/binary.cc
++++ b/src/binary.cc
+--- a/src/cache.cc
++++ b/src/cache.cc
+--- a/src/cache.h
++++ b/src/cache.h
+--- a/src/commodity.cc
++++ b/src/commodity.cc
+--- a/src/commodity.h
++++ b/src/commodity.h
+--- a/src/csv.cc
++++ b/src/csv.cc
+--- a/src/csv.h
++++ b/src/csv.h
+--- a/src/derive.cc
++++ b/src/derive.cc
+--- a/src/emacs.h
++++ b/src/emacs.h
+--- a/src/entry.cc
++++ b/src/entry.cc
+--- a/src/entry.h
++++ b/src/entry.h
+--- a/src/error.h
++++ b/src/error.h
+--- a/src/expr.cc
++++ b/src/expr.cc
+--- a/src/expr.h
++++ b/src/expr.h
+--- a/src/filters.cc
++++ b/src/filters.cc
+--- a/src/filters.h
++++ b/src/filters.h
+--- a/src/format.cc
++++ b/src/format.cc
+--- a/src/format.h
++++ b/src/format.h
+--- a/src/gnucash.cc
++++ b/src/gnucash.cc
+--- a/src/gnucash.h
++++ b/src/gnucash.h
+--- a/src/help.cc
++++ b/src/help.cc
+--- a/src/help.h
++++ b/src/help.h
+--- a/src/journal.cc
++++ b/src/journal.cc
+@@ -34,8 +34,6 @@
+ 
+ namespace ledger {
+ 
+-const string version = PACKAGE_VERSION;
+-
+ journal_t::journal_t(session_t * _owner)
+   : owner(_owner), basket(NULL)
+ {
+--- a/src/journal.h
++++ b/src/journal.h
+@@ -121,8 +121,6 @@ public:
+   bool valid() const;
+ };
+ 
+-extern const string version;
+-
+ } // namespace ledger
+ 
+ #endif // _JOURNAL_H
+--- a/src/main.cc
++++ b/src/main.cc
+@@ -494,18 +494,24 @@ int main(int argc, char * argv[], char * envp[])
+ {
+   int status = 1;
+ 
+-  for (int i = 1; i < argc; i++)
++  std::ios::sync_with_stdio(false);
++
++  std::vector<ledger::string> args;
++
++  for (int i = 1; i < argc; i++) {
+     if (argv[i][0] == '-') {
+       if (std::strcmp(argv[i], "--verify") == 0) {
+ #if defined(VERIFY_ON)
+ 	ledger::verify_enabled = true;
+ #endif
++	continue;
+       }
+       else if (std::strcmp(argv[i], "--verbose") == 0 ||
+ 	       std::strcmp(argv[i], "-v") == 0) {
+ #if defined(LOGGING_ON)
+ 	ledger::_log_level    = ledger::LOG_INFO;
+ #endif
++	continue;
+       }
+       else if (i + 1 < argc && std::strcmp(argv[i], "--debug") == 0) {
+ #if defined(DEBUG_ON)
+@@ -513,6 +519,7 @@ int main(int argc, char * argv[], char * envp[])
+ 	ledger::_log_category = argv[i + 1];
+ 	i++;
+ #endif
++	continue;
+       }
+       else if (i + 1 < argc && std::strcmp(argv[i], "--trace") == 0) {
+ #if defined(TRACING_ON)
+@@ -521,25 +528,34 @@ int main(int argc, char * argv[], char * envp[])
+ 	  ledger::_trace_level = boost::lexical_cast<int>(argv[i + 1]);
+ 	}
+ 	catch (const boost::bad_lexical_cast& e) {
+-	  std::cerr << "Argument to --trace must be an integer."
++	  STDERR << S("Argument to --trace must be an integer.")
+ 		    << std::endl;
+ 	  return 1;
+ 	}
+ 	i++;
+ #endif
++	continue;
+       }
+     }
++    args.push_back(ledger::to_wide(argv[i]));
++  }
++
++#if defined(USE_UNICODE)
++  IF_DEBUG("main.args") {
++    foreach (ledger::string& arg, args) {
++      std::wcout << S("Argument: ") << arg << std::endl;
++    }
++  }
++#endif
+ 
+   IF_VERIFY()
+     ledger::initialize_memory_tracing();
+ 
+   try {
+-    std::ios::sync_with_stdio(false);
+-
+     boost::filesystem::path::default_name_check
+       (boost::filesystem::portable_posix_name);
+ 
+-    INFO("Ledger starting");
++    INFO(S("Ledger starting"));
+ 
+     std::auto_ptr<ledger::session_t> session(new ledger::session_t);
+ 
+--- a/src/mask.h
++++ b/src/mask.h
+--- a/src/ofx.cc
++++ b/src/ofx.cc
+--- a/src/ofx.h
++++ b/src/ofx.h
+--- a/src/op.cc
++++ b/src/op.cc
+--- a/src/op.h
++++ b/src/op.h
+--- a/src/option.cc
++++ b/src/option.cc
+@@ -128,57 +128,70 @@ void process_environment(const char ** envp, const string& tag,
+ 
+       if (*q == '=') {
+ 	try {
+-	  process_option(string(buf), scope, q + 1);
++	  process_option(string(to_wide(buf)), scope, string(q + 1));
+ 	}
+ 	catch (const std::exception& err) {
+-	  add_error_context("While parsing environment variable option '"
+-			    << *p << "':");
++	  add_error_context(S("While parsing environment variable option '")
++			    << to_wide(*p) << S("':"));
+ 	  throw err;
+ 	}
+       }
+     }
++  }
+ }
+ 
+-void process_arguments(int, char ** argv, const bool anywhere,
+-		       scope_t& scope, std::list<string>& args)
++void process_arguments(std::vector<string>& args,
++		       const bool	    anywhere,
++		       scope_t&		    scope,
++		       std::list<string>&   cmd_args)
+ {
+-  for (char ** i = argv; *i; i++) {
+-    if ((*i)[0] != '-') {
++  bool consume = false;
++
++  for (std::vector<string>::iterator i = args.begin();
++       i != args.end();
++       i++) {
++    DEBUG("option.process.arg", S("checking arg (") << *i << S(")"));
++
++    if (consume) {
++      cmd_args.push_back(*i);
++      continue;
++    }
++    else if ((*i)[0] != C('-')) {
+       if (anywhere) {
+-	args.push_back(*i);
++	cmd_args.push_back(*i);
+ 	continue;
+       } else {
+-	for (; *i; i++)
+-	  args.push_back(*i);
+-	break;
++	cmd_args.push_back(*i);
++	consume = true;
++	continue;
+       }
+     }
+ 
+     // --long-option or -s
+-    if ((*i)[1] == '-') {
+-      if ((*i)[2] == '\0')
++    if ((*i)[1] == C('-')) {
++      if ((*i)[2] == C('\0'))
+ 	break;
+ 
+-      char * name  = *i + 2;
+-      char * value = NULL;
+-      if (char * p = std::strchr(name, '=')) {
+-	*p++ = '\0';
+-	value = p;
++      char_t * name  = &(*i)[2];
++      optional<string> value;
++      if (char_t * p = std_strchr(name, C('='))) {
++	*p++  = C('\0');
++	value = string(p);
+       }
+ 
+       op_bool_tuple opt(find_option(scope, name));
+       if (! opt.get<0>())
+-	throw_(option_error, "illegal option --" << name);
++	throw_(option_error, S("illegal option --") << name);
+ 
+-      if (opt.get<1>() && value == NULL) {
++      if (opt.get<1>() && ! value) {
+ 	value = *++i;
+-	if (value == NULL)
+-	  throw_(option_error, "missing option argument for --" << name);
++	if (! value)
++	  throw_(option_error, S("missing option argument for --") << name);
+       }
+       process_option(opt.get<0>()->as_function(), scope, value);
+     }
+-    else if ((*i)[1] == '\0') {
+-      throw_(option_error, "illegal option -");
++    else if ((*i)[1] == C('\0')) {
++      throw_(option_error, S("illegal option -"));
+     }
+     else {
+       typedef tuple<expr_t::ptr_op_t, bool, char> op_bool_char_tuple;
+@@ -186,22 +199,26 @@ void process_arguments(int, char ** argv, const bool anywhere,
+       std::list<op_bool_char_tuple> option_queue;
+ 
+       int x = 1;
+-      for (char c = (*i)[x]; c != '\0'; x++, c = (*i)[x]) {
++      for (char_t c = (*i)[x]; c != C('\0'); x++, c = (*i)[x]) {
+ 	op_bool_tuple opt(find_option(scope, c));
+ 	if (! opt.get<0>())
+-	  throw_(option_error, "illegal option -" << c);
++	  throw_(option_error, S("illegal option -") << c);
+ 
+ 	option_queue.push_back
+ 	  (op_bool_char_tuple(opt.get<0>(), opt.get<1>(), c));
+       }
+ 
+       foreach (op_bool_char_tuple& o, option_queue) {
+-	char * value = NULL;
++	optional<string> value;
+ 	if (o.get<1>()) {
+-	  value = *++i;
+-	  if (value == NULL)
++	  if (i != args.end()) {
++	    ++i;
++	    if (i != args.end())
++	      value = *i;
++	  }
++	  if (! value)
+ 	    throw_(option_error,
+-		   "missing option argument for -" << o.get<2>());
++		   S("missing option argument for -") << o.get<2>());
+ 	}
+ 	process_option(o.get<0>()->as_function(), scope, value);
+       }
+--- a/src/option.h
++++ b/src/option.h
+--- a/src/output.cc
++++ b/src/output.cc
+--- a/src/output.h
++++ b/src/output.h
+--- a/src/parser.cc
++++ b/src/parser.cc
+--- a/src/parser.h
++++ b/src/parser.h
+--- a/src/qif.cc
++++ b/src/qif.cc
+--- a/src/qif.h
++++ b/src/qif.h
+--- a/src/quotes.cc
++++ b/src/quotes.cc
+--- a/src/report.cc
++++ b/src/report.cc
+--- a/src/report.h
++++ b/src/report.h
+--- a/src/session.cc
++++ b/src/session.cc
+@@ -113,7 +113,7 @@ session_t::session_t()
+     ansi_codes(false),
+     ansi_invert(false),
+ 
+-    master(new account_t(this, NULL, ""))
++    master(new account_t(this))
+ {
+   TRACE_CTOR(session_t, "");
+ }
+--- a/src/session.h
++++ b/src/session.h
+@@ -178,18 +178,22 @@ public:
+   //
+ 
+   value_t option_version(scope_t&) {
+-    std::cout << "Ledger " << ledger::version << ", the command-line accounting tool";
+-    std::cout << "\n\nCopyright (c) 2003-2008, John Wiegley.  All rights reserved.\n\n\
++    STDOUT << "Ledger " << to_wide(PACKAGE_VERSION)
++	   << ", the command-line accounting tool"
++	   << "\n\nCopyright (c) 2003-2008, John Wiegley.  All rights reserved.\n\n\
+ This program is made available under the terms of the BSD Public License.\n\
+-See LICENSE file included with the distribution for details and disclaimer.\n";
+-    std::cout << "\n(modules: gmp, pcre";
++See LICENSE file included with the distribution for details and disclaimer.\n"
++	   << "\n(modules: gmp, pcre";
+ #if defined(HAVE_EXPAT) || defined(HAVE_XMLPARSE)
+-    std::cout << ", xml";
++    STDOUT << ", xml";
+ #endif
+ #ifdef HAVE_LIBOFX
+-    std::cout << ", ofx";
++    STDOUT << ", ofx";
+ #endif
+-    std::cout << ")\n";
++#ifdef USE_UNICODE
++    STDOUT << ", unicode";
++#endif
++    STDOUT << ")\n";
+     return NULL_VALUE;
+   }
+ 
+--- a/src/system.hh
++++ b/src/system.hh
+@@ -68,29 +68,6 @@
+ #include <string>
+ #include <vector>
+ 
+-#if defined(__GNUG__) && __GNUG__ < 3
+-
+-namespace std {
+-  inline ostream & right (ostream & i) {
+-    i.setf(i.right, i.adjustfield);
+-    return i;
+-  }
+-  inline ostream & left (ostream & i) {
+-    i.setf(i.left, i.adjustfield);
+-    return i;
+-  }
+-}
+-
+-typedef unsigned long istream_pos_type;
+-typedef unsigned long ostream_pos_type;
+-
+-#else // ! (defined(__GNUG__) && __GNUG__ < 3)
+-
+-typedef std::istream::pos_type istream_pos_type;
+-typedef std::ostream::pos_type ostream_pos_type;
+-
+-#endif
+-
+ #include <cassert>
+ #include <cctype>
+ #include <cstdarg>
+@@ -122,6 +99,11 @@ typedef std::ostream::pos_type ostream_pos_type;
+ 
+ #include <gmp.h>
+ 
++#if defined(USE_UNICODE)
++#define XML_UNICODE (1)
++#define XML_UNICODE_WCHAR_T (1)
++#endif
++
+ extern "C" {
+ #if defined(HAVE_EXPAT)
+ #include <expat.h>		// expat XML parser
+--- a/src/textual.cc
++++ b/src/textual.cc
+@@ -470,19 +470,23 @@ bool parse_xacts(std::istream&	  in,
+   return added;
+ }
+ 
+-entry_t * parse_entry(std::istream& in, char * line, account_t * master,
+-		      textual_parser_t& parser, istream_pos_type& pos)
++entry_t * parse_entry(istream&		in,
++		      char_t *		line,
++		      account_t *	master,
++		      journal_t&	journal,
++		      textual_parser_t& parser,
++		      istream_pos_type& pos)
+ {
+   TRACE_START(entry_text, 1, "Time spent preparing entry text:");
+ 
+-  std::auto_ptr<entry_t> curr(new entry_t);
++  std::auto_ptr<entry_t> curr(new entry_t(&journal));
+ 
+   // Parse the date
+ 
+-  char * next = next_element(line);
++  char_t * next = next_element(line);
+ 
+-  if (char * p = std::strchr(line, '=')) {
+-    *p++ = '\0';
++  if (char_t * p = std_strchr(line, C('='))) {
++    *p++ = C('\0');
+     curr->_date_eff = parse_date(p);
+   }
+   curr->_date = parse_date(line);
+@@ -652,33 +656,30 @@ static void clock_out_from_timelog(std::list<time_entry_t>& time_entries,
+     desc = NULL;
+   }
+ 
+-  std::auto_ptr<entry_t> curr(new entry_t);
++  std::auto_ptr<entry_t> curr(new entry_t(&journal));
+   curr->_date = when.date();
+-  curr->code  = desc ? desc : "";
++  curr->code  = desc ? desc : S("");
+   curr->payee = event.desc;
+ 
+   if (when < event.checkin)
+-    throw parse_error
+-      ("Timelog check-out date less than corresponding check-in");
+-
+-  char buf[32];
+-  std::sprintf(buf, "%lds", long((when - event.checkin).seconds()));
+-  amount_t amt;
+-  amt.parse(buf);
+-  assert(amt.valid());
++    throw_(parse_error,
++	   (S("Timelog check-out date less than corresponding check-in")));
+ 
++  amount_t amt(lexical_cast<std_string>(long((when -
++					      event.checkin).seconds()))
++	       + S("s"));
+   xact_t * xact
+     = new xact_t(event.account, amt, XACT_VIRTUAL);
+   xact->state = xact_t::CLEARED;
+   curr->add_xact(xact);
+ 
+   if (! journal.add_entry(curr.get()))
+-    throw parse_error("Failed to record 'out' timelog entry");
++    throw_(parse_error, S("Failed to record 'out' timelog entry"));
+   else
+     curr.release();
+ }
+ 
+-unsigned int textual_parser_t::parse(std::istream& in,
++unsigned int textual_parser_t::parse(istream& in,
+ 				     session_t&    session,
+ 				     journal_t&	   journal,
+ 				     account_t *   master,
+--- a/src/textual.h
++++ b/src/textual.h
+--- a/src/times.cc
++++ b/src/times.cc
+--- a/src/times.h
++++ b/src/times.h
+--- a/src/token.cc
++++ b/src/token.cc
+--- a/src/token.h
++++ b/src/token.h
+--- a/src/utils.cc
++++ b/src/utils.cc
+@@ -182,7 +182,12 @@ static void trace_delete_func(void * ptr, const char * which)
+     return;
+ 
+   std::size_t size = (*i).second.second;
+-  VERIFY((*i).second.first == which);
++  if ((*i).second.first != which) {
++    DEBUG("utils.memory.untracked",
++	  ptr << S(": ") << to_wide((*i).second.first)
++	  << S(" != ") << to_wide(which));
++    return;
++  }
+ 
+   live_memory->erase(i);
+ 
+--- a/src/utils.h
++++ b/src/utils.h
+@@ -103,11 +159,29 @@ namespace ledger {
+   typedef gregorian::date_duration  date_duration;
+   typedef posix_time::seconds	    seconds;
+ 
+-  typedef boost::filesystem::path	      path;
+-  typedef boost::filesystem::ifstream	      ifstream;
+-  typedef boost::filesystem::ofstream	      ofstream;
+-  typedef boost::filesystem::filesystem_error filesystem_error;
++#if defined(USE_UNICODE)
++  typedef boost::filesystem::wpath path;
++#else
++  typedef boost::filesystem::path  path;
++#endif
++
++  typedef boost::filesystem::basic_ifstream<char_t> ifstream;
++  typedef boost::filesystem::basic_ofstream<char_t> ofstream;
++  typedef boost::filesystem::filesystem_error	    filesystem_error;
++}
++
++#if defined(__GNUG__) && __GNUG__ < 3
++namespace std {
++  inline ostream & right (ostream & i) {
++    i.setf(i.right, i.adjustfield);
++    return i;
++  }
++  inline ostream & left (ostream & i) {
++    i.setf(i.left, i.adjustfield);
++    return i;
++  }
+ }
++#endif
+ 
+ /**********************************************************************
+  *
+@@ -240,7 +329,7 @@ inline bool operator!=(const string& __lhs, const char* __rhs)
+ #else // ! VERIFY_ON
+ 
+ #define VERIFY(x)
+-#define DO_VERIFY() true
++#define DO_VERIFY() false
+ #define TRACE_CTOR(cls, args)
+ #define TRACE_DTOR(cls)
+ 
+--- a/src/value.cc
++++ b/src/value.cc
+--- a/src/value.h
++++ b/src/value.h
+--- a/src/xact.cc
++++ b/src/xact.cc
+--- a/src/xml.cc
++++ b/src/xml.cc
+--- a/src/xml.h
++++ b/src/xml.h
+--- a/test/unit/t_amount.cc
++++ b/test/unit/t_amount.cc
+@@ -169,8 +169,10 @@ void AmountTestCase::testCommodityConstructors()
+   amount_t x6("DM -123.45");
+   amount_t x7("123.45 euro");
+   amount_t x8("-123.45 euro");
++#if defined(USE_UNICODE)
+   amount_t x9("123.45€");
+   amount_t x10("-123.45€");
++#endif
+ 
+   assertEqual(amount_t("$123.45"), x1);
+   assertEqual(amount_t("-$123.45"), x2);
+@@ -180,8 +182,10 @@ void AmountTestCase::testCommodityConstructors()
+   assertEqual(amount_t("DM -123.45"), x6);
+   assertEqual(amount_t("123.45 euro"), x7);
+   assertEqual(amount_t("-123.45 euro"), x8);
++#if defined(USE_UNICODE)
+   assertEqual(amount_t("123.45€"), x9);
+   assertEqual(amount_t("-123.45€"), x10);
++#endif
+ 
+   assertEqual(string("$123.45"), x1.to_string());
+   assertEqual(string("$-123.45"), x2.to_string());
+@@ -191,8 +195,10 @@ void AmountTestCase::testCommodityConstructors()
+   assertEqual(string("DM -123.45"), x6.to_string());
+   assertEqual(string("123.45 euro"), x7.to_string());
+   assertEqual(string("-123.45 euro"), x8.to_string());
++#if defined(USE_UNICODE)
+   assertEqual(string("123.45€"), x9.to_string());
+   assertEqual(string("-123.45€"), x10.to_string());
++#endif
+ 
+   assertValid(x1);
+   assertValid(x2);
+@@ -202,8 +208,10 @@ void AmountTestCase::testCommodityConstructors()
+   assertValid(x6);
+   assertValid(x7);
+   assertValid(x8);
++#if defined(USE_UNICODE)
+   assertValid(x9);
+   assertValid(x10);
++#endif
+ }
+ 
+ void AmountTestCase::testAssignment()
+@@ -264,8 +272,10 @@ void AmountTestCase::testCommodityAssignment()
+   amount_t x6;
+   amount_t x7;
+   amount_t x8;
++#if defined(USE_UNICODE)
+   amount_t x9;
+   amount_t x10;
++#endif
+ 
+   x1  = "$123.45";
+   x2  = "-$123.45";
+@@ -275,8 +285,10 @@ void AmountTestCase::testCommodityAssignment()
+   x6  = "DM -123.45";
+   x7  = "123.45 euro";
+   x8  = "-123.45 euro";
++#if defined(USE_UNICODE)
+   x9  = "123.45€";
+   x10 = "-123.45€";
++#endif
+ 
+   assertEqual(amount_t("$123.45"), x1);
+   assertEqual(amount_t("-$123.45"), x2);
+@@ -286,8 +298,10 @@ void AmountTestCase::testCommodityAssignment()
+   assertEqual(amount_t("DM -123.45"), x6);
+   assertEqual(amount_t("123.45 euro"), x7);
+   assertEqual(amount_t("-123.45 euro"), x8);
++#if defined(USE_UNICODE)
+   assertEqual(amount_t("123.45€"), x9);
+   assertEqual(amount_t("-123.45€"), x10);
++#endif
+ 
+   assertEqual(string("$123.45"), x1.to_string());
+   assertEqual(string("$-123.45"), x2.to_string());
+@@ -297,8 +311,10 @@ void AmountTestCase::testCommodityAssignment()
+   assertEqual(string("DM -123.45"), x6.to_string());
+   assertEqual(string("123.45 euro"), x7.to_string());
+   assertEqual(string("-123.45 euro"), x8.to_string());
++#if defined(USE_UNICODE)
+   assertEqual(string("123.45€"), x9.to_string());
+   assertEqual(string("-123.45€"), x10.to_string());
++#endif
+ 
+   assertValid(x1);
+   assertValid(x2);
+@@ -308,8 +324,10 @@ void AmountTestCase::testCommodityAssignment()
+   assertValid(x6);
+   assertValid(x7);
+   assertValid(x8);
++#if defined(USE_UNICODE)
+   assertValid(x9);
+   assertValid(x10);
++#endif
+ }
+ 
+ void AmountTestCase::testEquality()
+@@ -365,8 +383,10 @@ void AmountTestCase::testCommodityEquality()
+   x6  = "DM -123.45";
+   x7  = "123.45 euro";
+   x8  = "-123.45 euro";
++#if defined(USE_UNICODE)
+   x9  = "123.45€";
+   x10 = "-123.45€";
++#endif
+ 
+   assertTrue(x0.is_null());
+   assertThrow(x0.is_zero(), amount_error);
+@@ -379,12 +399,16 @@ void AmountTestCase::testCommodityEquality()
+   assertTrue(x1 != x2);
+   assertTrue(x1 != x4);
+   assertTrue(x1 != x7);
++#if defined(USE_UNICODE)
+   assertTrue(x1 != x9);
++#endif
+   assertTrue(x2 == x3);
+   assertTrue(x4 != x5);
+   assertTrue(x5 == x6);
+   assertTrue(x7 == - x8);
++#if defined(USE_UNICODE)
+   assertTrue(x9 == - x10);
++#endif
+ 
+   assertValid(x0);
+   assertValid(x1);
+@@ -395,8 +419,10 @@ void AmountTestCase::testCommodityEquality()
+   assertValid(x6);
+   assertValid(x7);
+   assertValid(x8);
++#if defined(USE_UNICODE)
+   assertValid(x9);
+   assertValid(x10);
++#endif
+ }
+ 
+ void AmountTestCase::testComparisons()
+@@ -525,7 +551,9 @@ void AmountTestCase::testCommodityAddition()
+   amount_t x2(internalAmount("$123.456789"));
+   amount_t x3("DM 123.45");
+   amount_t x4("123.45 euro");
++#if defined(USE_UNICODE)
+   amount_t x5("123.45€");
++#endif
+   amount_t x6("123.45");
+ 
+   assertEqual(amount_t("$246.90"), x1 + x1);
+@@ -541,7 +569,9 @@ void AmountTestCase::testCommodityAddition()
+   assertThrow(x0 + x0, amount_error);
+   assertThrow(x1 + x3, amount_error);
+   assertThrow(x1 + x4, amount_error);
++#if defined(USE_UNICODE)
+   assertThrow(x1 + x5, amount_error);
++#endif
+   assertThrow(x1 + x6, amount_error);
+ #ifdef HAVE_GDTOA
+   assertThrow(x1 + 123.45, amount_error);
+@@ -550,11 +580,15 @@ void AmountTestCase::testCommodityAddition()
+ 
+   assertEqual(amount_t("DM 246.90"), x3 + x3);
+   assertEqual(amount_t("246.90 euro"), x4 + x4);
++#if defined(USE_UNICODE)
+   assertEqual(amount_t("246.90€"), x5 + x5);
++#endif
+ 
+   assertEqual(string("DM 246.90"), (x3 + x3).to_string());
+   assertEqual(string("246.90 euro"), (x4 + x4).to_string());
++#if defined(USE_UNICODE)
+   assertEqual(string("246.90€"), (x5 + x5).to_string());
++#endif
+ 
+   x1 += amount_t("$456.45");
+   assertEqual(amount_t("$579.90"), x1);
+@@ -571,7 +605,9 @@ void AmountTestCase::testCommodityAddition()
+   assertValid(x2);
+   assertValid(x3);
+   assertValid(x4);
++#if defined(USE_UNICODE)
+   assertValid(x5);
++#endif
+   assertValid(x6);
+   assertValid(x7);
+ }
+@@ -637,7 +673,9 @@ void AmountTestCase::testCommoditySubtraction()
+   amount_t x2(internalAmount("$123.456789"));
+   amount_t x3("DM 123.45");
+   amount_t x4("123.45 euro");
++#if defined(USE_UNICODE)
+   amount_t x5("123.45€");
++#endif
+   amount_t x6("123.45");
+ 
+   assertNotEqual(amount_t(), x1 - x1);
+@@ -657,7 +695,9 @@ void AmountTestCase::testCommoditySubtraction()
+   assertThrow(x0 - x0, amount_error);
+   assertThrow(x1 - x3, amount_error);
+   assertThrow(x1 - x4, amount_error);
++#if defined(USE_UNICODE)
+   assertThrow(x1 - x5, amount_error);
++#endif
+   assertThrow(x1 - x6, amount_error);
+ #ifdef HAVE_GDTOA
+   assertThrow(x1 - 123.45, amount_error);
+@@ -670,9 +710,11 @@ void AmountTestCase::testCommoditySubtraction()
+   assertEqual(amount_t("0.00 euro"), x4 - x4);
+   assertEqual(amount_t("23.45 euro"), x4 - amount_t("100.00 euro"));
+   assertEqual(amount_t("-23.45 euro"), amount_t("100.00 euro") - x4);
++#if defined(USE_UNICODE)
+   assertEqual(amount_t("0.00€"), x5 - x5);
+   assertEqual(amount_t("23.45€"), x5 - amount_t("100.00€"));
+   assertEqual(amount_t("-23.45€"), amount_t("100.00€") - x5);
++#endif
+ 
+   assertEqual(string("DM 0.00"), (x3 - x3).to_string());
+   assertEqual(string("DM 23.45"), (x3 - amount_t("DM 100.00")).to_string());
+@@ -680,9 +722,11 @@ void AmountTestCase::testCommoditySubtraction()
+   assertEqual(string("0.00 euro"), (x4 - x4).to_string());
+   assertEqual(string("23.45 euro"), (x4 - amount_t("100.00 euro")).to_string());
+   assertEqual(string("-23.45 euro"), (amount_t("100.00 euro") - x4).to_string());
++#if defined(USE_UNICODE)
+   assertEqual(string("0.00€"), (x5 - x5).to_string());
+   assertEqual(string("23.45€"), (x5 - amount_t("100.00€")).to_string());
+   assertEqual(string("-23.45€"), (amount_t("100.00€") - x5).to_string());
++#endif
+ 
+   x1 -= amount_t("$456.45");
+   assertEqual(amount_t("$-333.00"), x1);
+@@ -707,7 +751,9 @@ void AmountTestCase::testCommoditySubtraction()
+   assertValid(x2);
+   assertValid(x3);
+   assertValid(x4);
++#if defined(USE_UNICODE)
+   assertValid(x5);
++#endif
+   assertValid(x6);
+   assertValid(x7);
+   assertValid(x8);
+@@ -793,7 +839,9 @@ void AmountTestCase::testCommodityMultiplication()
+   amount_t x2(internalAmount("$123.456789"));
+   amount_t x3("DM 123.45");
+   amount_t x4("123.45 euro");
++#if defined(USE_UNICODE)
+   amount_t x5("123.45€");
++#endif
+ 
+   assertEqual(amount_t("$0.00"), x1 * 0L);
+   assertEqual(amount_t("$0.00"), 0L * x1);
+@@ -816,9 +864,11 @@ void AmountTestCase::testCommodityMultiplication()
+   assertThrow(x1 * x0, amount_error);
+   assertThrow(x0 * x1, amount_error);
+   assertThrow(x0 * x0, amount_error);
+-  //assertThrow(x1 * x3, amount_error);
+-  //assertThrow(x1 * x4, amount_error);
+-  //assertThrow(x1 * x5, amount_error);
++  assertThrow(x0 * x3, amount_error);
++  assertThrow(x0 * x4, amount_error);
++#if defined(USE_UNICODE)
++  assertThrow(x0 * x5, amount_error);
++#endif
+ 
+   x1 *= amount_t("123.12");
+   assertEqual(internalAmount("$15158.5344"), x1);
+@@ -839,7 +889,9 @@ void AmountTestCase::testCommodityMultiplication()
+   assertValid(x2);
+   assertValid(x3);
+   assertValid(x4);
++#if defined(USE_UNICODE)
+   assertValid(x5);
++#endif
+   assertValid(x7);
+ }
+ 
+@@ -927,7 +979,9 @@ void AmountTestCase::testCommodityDivision()
+   amount_t x2(internalAmount("$123.456789"));
+   amount_t x3("DM 123.45");
+   amount_t x4("123.45 euro");
++#if defined(USE_UNICODE)
+   amount_t x5("123.45€");
++#endif
+ 
+   assertThrow(x1 / 0L, amount_error);
+   assertEqual(amount_t("$0.00"), 0L / x1);
+@@ -950,9 +1004,11 @@ void AmountTestCase::testCommodityDivision()
+   assertThrow(x1 / x0, amount_error);
+   assertThrow(x0 / x1, amount_error);
+   assertThrow(x0 / x0, amount_error);
+-  //assertThrow(x1 / x3, amount_error);
+-  //assertThrow(x1 / x4, amount_error);
+-  //assertThrow(x1 / x5, amount_error);
++  assertThrow(x0 / x3, amount_error);
++  assertThrow(x0 / x4, amount_error);
++#if defined(USE_UNICODE)
++  assertThrow(x0 / x5, amount_error);
++#endif
+ 
+   x1 /= amount_t("123.12");
+   assertEqual(internalAmount("$1.00"), x1);
+@@ -977,7 +1033,9 @@ void AmountTestCase::testCommodityDivision()
+   assertValid(x2);
+   assertValid(x3);
+   assertValid(x4);
++#if defined(USE_UNICODE)
+   assertValid(x5);
++#endif
+   assertValid(x6);
+   assertValid(x7);
+ }
+@@ -1025,8 +1083,10 @@ void AmountTestCase::testCommodityNegation()
+   amount_t x6("DM -123.45");
+   amount_t x7("123.45 euro");
+   amount_t x8("-123.45 euro");
++#if defined(USE_UNICODE)
+   amount_t x9("123.45€");
+   amount_t x10("-123.45€");
++#endif
+ 
+   assertEqual(amount_t("$-123.45"), - x1);
+   assertEqual(amount_t("$123.45"), - x2);
+@@ -1036,8 +1096,10 @@ void AmountTestCase::testCommodityNegation()
+   assertEqual(amount_t("DM 123.45"), - x6);
+   assertEqual(amount_t("-123.45 euro"), - x7);
+   assertEqual(amount_t("123.45 euro"), - x8);
++#if defined(USE_UNICODE)
+   assertEqual(amount_t("-123.45€"), - x9);
+   assertEqual(amount_t("123.45€"), - x10);
++#endif
+ 
+   assertEqual(amount_t("$-123.45"), x1.negate());
+   assertEqual(amount_t("$123.45"), x2.negate());
+@@ -1051,8 +1113,10 @@ void AmountTestCase::testCommodityNegation()
+   assertEqual(string("DM 123.45"), (- x6).to_string());
+   assertEqual(string("-123.45 euro"), (- x7).to_string());
+   assertEqual(string("123.45 euro"), (- x8).to_string());
++#if defined(USE_UNICODE)
+   assertEqual(string("-123.45€"), (- x9).to_string());
+   assertEqual(string("123.45€"), (- x10).to_string());
++#endif
+ 
+   assertEqual(amount_t("$-123.45"), x1.negate());
+   assertEqual(amount_t("$123.45"), x2.negate());
+@@ -1066,8 +1130,10 @@ void AmountTestCase::testCommodityNegation()
+   assertValid(x6);
+   assertValid(x7);
+   assertValid(x8);
++#if defined(USE_UNICODE)
+   assertValid(x9);
+   assertValid(x10);
++#endif
+ }
+ 
+ void AmountTestCase::testAbs()
