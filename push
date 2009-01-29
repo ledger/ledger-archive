@@ -1,8 +1,0 @@
-#!/bin/sh
-
-git push github
-git push --tags github
-git push --tags mirror
-git push --mirror mirror
-
-git remote update
