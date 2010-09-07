@@ -1,0 +1,450 @@
+bplist00“_WebMainResource_WebSubresources’	
+^WebResourceURL_WebResourceTextEncodingName_WebResourceMIMEType_WebResourceData_WebResourceFrameName_:http://joyful.com/repos/hledger/api-doc/Ledger-Amount.htmlUUTF-8Ytext/htmlO!'<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!--Rendered using the Haskell Html Library v0.2--><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Ledger.Amount</title><link href="haddock.css" rel="stylesheet" type="text/css"><script src="haddock-util.js" type="text/javascript"></script></head><body><table class="vanilla" cellspacing="0" cellpadding="0"><tbody><tr><td class="topbar"><table class="vanilla" cellspacing="0" cellpadding="0"><tbody><tr><td><img src="haskell_icon.gif" width="16" height="16" alt=" "></td><td class="title"></td><td class="topbut"><a href="src-Ledger-Amount.html">Source code</a></td><td class="topbut"><a href="index.html">Contents</a></td><td class="topbut"><a href="doc-index.html">Index</a></td></tr></tbody></table></td></tr><tr><td class="modulebar"><table class="vanilla" cellspacing="0" cellpadding="0"><tbody><tr><td><font size="6">Ledger.Amount</font></td></tr></tbody></table></td></tr><tr><td class="s15"></td></tr><tr><td class="section1">Description</td></tr><tr><td class="doc"><p>An <tt><a href="Ledger-Types.html#t%3AAmount">Amount</a></tt> is some quantity of money, shares, or anything else.
+</p><p>A simple amount is a commodity, quantity pair:
+</p><pre>  $1 
+  ¬£-50
+  EUR 3.44 
+  GOOG 500
+  1.5h
+  90apples
+  0 
+</pre><p>A mixed amount is zero or more simple amounts:
+</p><pre>  $50, EUR 3, AAPL 500
+  16h, $13.55, oranges 6
+</pre><p>Not fully implemented:
+Commodities may be convertible or not. A mixed amount containing only
+convertible commodities can be converted to a simple amount. Arithmetic
+examples:
+</p><pre>  $1 - $5 = $-4
+  $1 + EUR 0.76 = $2
+  EUR0.76 + $1 = EUR 1.52
+  EUR0.76 - $1 = 0
+  ($5, 2h) + $1 = ($6, 2h)
+  ($50, EUR 3, AAPL 500) + ($13.55, oranges 6) = $67.51, AAPL 500, oranges 6
+  ($50, EUR 3) * $-1 = $-53.96
+  ($50, AAPL 500) * $-1 = error
+</pre></td></tr><tr><td class="s15"></td></tr><tr><td class="section1">Synopsis</td></tr><tr><td class="s15"></td></tr><tr><td class="body"><table class="vanilla" cellspacing="0" cellpadding="0"><tbody><tr><td class="decl"><a href="#v%3AshowMixedAmount">showMixedAmount</a> :: <a href="Ledger-Types.html#t%3AMixedAmount">MixedAmount</a> -> String</td></tr><tr><td class="s8"></td></tr><tr><td class="decl"><a href="#v%3AnormaliseMixedAmount">normaliseMixedAmount</a> :: <a href="Ledger-Types.html#t%3AMixedAmount">MixedAmount</a> -> <a href="Ledger-Types.html#t%3AMixedAmount">MixedAmount</a></td></tr><tr><td class="s8"></td></tr><tr><td class="decl"><a href="#v%3AgroupAmountsByCommodity">groupAmountsByCommodity</a> :: [<a href="Ledger-Types.html#t%3AAmount">Amount</a>] -> [[<a href="Ledger-Types.html#t%3AAmount">Amount</a>]]</td></tr><tr><td class="s8"></td></tr><tr><td class="decl"><a href="#v%3AshowAmount">showAmount</a> :: <a href="Ledger-Types.html#t%3AAmount">Amount</a> -> String</td></tr><tr><td class="s8"></td></tr><tr><td class="decl"><a href="#v%3Apunctuatethousands">punctuatethousands</a> :: String -> String</td></tr><tr><td class="s8"></td></tr><tr><td class="decl"><a href="#v%3AshowAmountOrZero">showAmountOrZero</a> :: <a href="Ledger-Types.html#t%3AAmount">Amount</a> -> String</td></tr><tr><td class="s8"></td></tr><tr><td class="decl"><a href="#v%3AisZeroAmount">isZeroAmount</a> :: <a href="Ledger-Types.html#t%3AAmount">Amount</a> -> Bool</td></tr><tr><td class="s8"></td></tr><tr><td class="decl"><a href="#v%3AisZeroMixedAmount">isZeroMixedAmount</a> :: <a href="Ledger-Types.html#t%3AMixedAmount">MixedAmount</a> -> Bool</td></tr><tr><td class="s8"></td></tr><tr><td class="decl"><a href="#v%3Aamountop">amountop</a> :: (Double -> Double -> Double) -> <a href="Ledger-Types.html#t%3AAmount">Amount</a> -> <a href="Ledger-Types.html#t%3AAmount">Amount</a> -> <a href="Ledger-Types.html#t%3AAmount">Amount</a></td></tr><tr><td class="s8"></td></tr><tr><td class="decl"><a href="#v%3AconvertAmountTo">convertAmountTo</a> :: <a href="Ledger-Types.html#t%3ACommodity">Commodity</a> -> <a href="Ledger-Types.html#t%3AAmount">Amount</a> -> <a href="Ledger-Types.html#t%3AAmount">Amount</a></td></tr><tr><td class="s8"></td></tr><tr><td class="decl"><a href="#v%3AsumAmounts">sumAmounts</a> :: [<a href="Ledger-Types.html#t%3AAmount">Amount</a>] -> <a href="Ledger-Types.html#t%3AAmount">Amount</a></td></tr><tr><td class="s8"></td></tr><tr><td class="decl"><a href="#v%3AsumMixedAmounts">sumMixedAmounts</a> :: [<a href="Ledger-Types.html#t%3AMixedAmount">MixedAmount</a>] -> <a href="Ledger-Types.html#t%3AMixedAmount">MixedAmount</a></td></tr></tbody></table></td></tr><tr><td class="s15"></td></tr><tr><td class="section1">Documentation</td></tr><tr><td class="s15"></td></tr><tr><td class="decl"><a name="v%3AshowMixedAmount"></a><b>showMixedAmount</b> :: <a href="Ledger-Types.html#t%3AMixedAmount">MixedAmount</a> -> String</td></tr><tr><td class="s15"></td></tr><tr><td class="decl"><a name="v%3AnormaliseMixedAmount"></a><b>normaliseMixedAmount</b> :: <a href="Ledger-Types.html#t%3AMixedAmount">MixedAmount</a> -> <a href="Ledger-Types.html#t%3AMixedAmount">MixedAmount</a></td></tr><tr><td class="s15"></td></tr><tr><td class="decl"><a name="v%3AgroupAmountsByCommodity"></a><b>groupAmountsByCommodity</b> :: [<a href="Ledger-Types.html#t%3AAmount">Amount</a>] -> [[<a href="Ledger-Types.html#t%3AAmount">Amount</a>]]</td></tr><tr><td class="s15"></td></tr><tr><td class="decl"><a name="v%3AshowAmount"></a><b>showAmount</b> :: <a href="Ledger-Types.html#t%3AAmount">Amount</a> -> String</td></tr><tr><td class="doc">Get the string representation of an amount, based on its commodity's
+ display settings.
+</td></tr><tr><td class="s15"></td></tr><tr><td class="decl"><a name="v%3Apunctuatethousands"></a><b>punctuatethousands</b> :: String -> String</td></tr><tr><td class="doc">Add thousands-separating commas to a decimal number string
+</td></tr><tr><td class="s15"></td></tr><tr><td class="decl"><a name="v%3AshowAmountOrZero"></a><b>showAmountOrZero</b> :: <a href="Ledger-Types.html#t%3AAmount">Amount</a> -> String</td></tr><tr><td class="doc">Get the string representation of an amount, rounded, or showing just <a href="0.html">0</a> if it's zero.
+</td></tr><tr><td class="s15"></td></tr><tr><td class="decl"><a name="v%3AisZeroAmount"></a><b>isZeroAmount</b> :: <a href="Ledger-Types.html#t%3AAmount">Amount</a> -> Bool</td></tr><tr><td class="doc">is this amount zero, when displayed with its given precision ?
+</td></tr><tr><td class="s15"></td></tr><tr><td class="decl"><a name="v%3AisZeroMixedAmount"></a><b>isZeroMixedAmount</b> :: <a href="Ledger-Types.html#t%3AMixedAmount">MixedAmount</a> -> Bool</td></tr><tr><td class="s15"></td></tr><tr><td class="decl"><a name="v%3Aamountop"></a><b>amountop</b> :: (Double -> Double -> Double) -> <a href="Ledger-Types.html#t%3AAmount">Amount</a> -> <a href="Ledger-Types.html#t%3AAmount">Amount</a> -> <a href="Ledger-Types.html#t%3AAmount">Amount</a></td></tr><tr><td class="doc">Apply a binary arithmetic operator to two amounts, converting to the
+ second one's commodity and adopting the lowest precision. (Using the
+ second commodity means that folds (like sum [Amount]) will preserve the
+ commodity.)
+</td></tr><tr><td class="s15"></td></tr><tr><td class="decl"><a name="v%3AconvertAmountTo"></a><b>convertAmountTo</b> :: <a href="Ledger-Types.html#t%3ACommodity">Commodity</a> -> <a href="Ledger-Types.html#t%3AAmount">Amount</a> -> <a href="Ledger-Types.html#t%3AAmount">Amount</a></td></tr><tr><td class="doc">Convert an amount to the specified commodity using the appropriate
+ exchange rate.
+</td></tr><tr><td class="s15"></td></tr><tr><td class="decl"><a name="v%3AsumAmounts"></a><b>sumAmounts</b> :: [<a href="Ledger-Types.html#t%3AAmount">Amount</a>] -> <a href="Ledger-Types.html#t%3AAmount">Amount</a></td></tr><tr><td class="doc">Sum a list of amounts. This is still needed because a final zero
+ amount will discard the sum's commodity.
+</td></tr><tr><td class="s15"></td></tr><tr><td class="decl"><a name="v%3AsumMixedAmounts"></a><b>sumMixedAmounts</b> :: [<a href="Ledger-Types.html#t%3AMixedAmount">MixedAmount</a>] -> <a href="Ledger-Types.html#t%3AMixedAmount">MixedAmount</a></td></tr><tr><td class="s15"></td></tr><tr><td class="botbar">Produced by <a href="http://www.haskell.org/haddock/">Haddock</a> version 2.2.2</td></tr></tbody></table>
+</body></html>P£‘_WebResourceResponse_3http://joyful.com/repos/hledger/api-doc/haddock.cssO{bplist00‘	
+X$versionT$topY$archiverX$objects Ü†—_WebResourceResponseÄ_NSKeyedArchiverØ"&,-345QRSTUVWXYZ[\]^_`abcdecfjkU$null› !"#$%V$classR$3R$8S$10S$11R$5R$6R$4R$7R$2R$9R$0R$1Ä!ÄÄ  ÄÄÄÄÄ ”'()$+WNS.base[NS.relativeÄÄ Ä_3http://joyful.com/repos/hledger/api-doc/haddock.css“./01X$classesZ$classname¢12UNSURLXNSObject#A≠S¢RŒ»”6789EWNS.keysZNS.objectsÄ´:;<=>?@ABCDÄ	Ä
+ÄÄÄÄÄÄÄÄÄ´FGHIJKLMNOPÄÄÄÄÄÄÄÄÄÄÄWX-Cache]Last-ModifiedSVia]Accept-RangesVServer\Content-TypeTDate_Proxy-Connection^Content-LengthTEtagZConnection_MISS from localhost_Sat, 18 Oct 2008 07:04:32 GMT_&1.1 localhost:3128 (squid/2.7.STABLE4)Ubytes_Apache/2.2.8 (Ubuntu)Xtext/css_Sat, 18 Oct 2008 08:08:43 GMTZkeep-aliveT4179_"3c88ef-1053-45981b197a000"“./gh£hi2_NSMutableDictionary\NSDictionaryS“./lm£mn2_NSHTTPURLResponse]NSURLResponse     ) 2 7 : P R d â è ™ ± ¥ ∑ ª ø ¬ ≈ » À Œ — ‘ ◊ Ÿ € › ﬂ · „ Â Á È Î Ì Ô ˆ ˛
+FKT_bhqz|Éãñò§¶®™¨Æ∞≤¥∂∏∫∆» ÃŒ–“‘÷ÿ⁄‹‰Úˆ0?DOeÖÆ¥Ã’ı #(,BORW[o             o              }Xtext/cssOS/* -------- Global things --------- */
+
+BODY { 
+  background-color: #ffffff;
+  color: #000000;
+  font-family: sans-serif;
+  } 
+
+A:link    { color: #0000e0; text-decoration: none }
+A:visited { color: #0000a0; text-decoration: none }
+A:hover   { background-color: #e0e0ff; text-decoration: none }
+
+TABLE.vanilla {
+  width: 100%;
+  border-width: 0px;
+  /* I can't seem to specify cellspacing or cellpadding properly using CSS... */
+}
+
+TABLE.vanilla2 {
+  border-width: 0px;
+}
+
+/* <TT> font is a little too small in MSIE */
+TT  { font-size: 100%; }
+PRE { font-size: 100%; }
+
+LI P { margin: 0pt } 
+
+TD {
+  border-width: 0px;
+}
+
+TABLE.narrow {
+  border-width: 0px;
+}
+
+TD.s8  {  height: 8px;  }
+TD.s15 {  height: 15px; }
+
+SPAN.keyword { text-decoration: underline; }
+
+/* Resize the buttom image to match the text size */
+IMG.coll { width : 0.75em; height: 0.75em; margin-bottom: 0; margin-right: 0.5em }
+
+/* --------- Contents page ---------- */
+
+DIV.node {
+  padding-left: 3em;
+}
+
+DIV.cnode {
+  padding-left: 1.75em;
+}
+
+SPAN.pkg {
+  position: absolute;
+  left: 50em;
+}
+
+/* --------- Documentation elements ---------- */
+
+TD.children {
+  padding-left: 25px;
+  }
+
+TD.synopsis {
+  padding: 2px;
+  background-color: #f0f0f0;
+  font-family: monospace
+ }
+
+TD.decl { 
+  padding: 2px;
+  background-color: #f0f0f0; 
+  font-family: monospace;
+  vertical-align: top;
+  }
+
+TD.topdecl {
+  padding: 2px;
+  background-color: #f0f0f0;
+  font-family: monospace;
+  vertical-align: top;
+}
+
+TABLE.declbar {
+  border-spacing: 0px;
+ }
+
+TD.declname {
+  width: 100%;
+ }
+
+TD.declbut {
+  padding-left: 5px;
+  padding-right: 5px;
+  border-left-width: 1px;
+  border-left-color: #000099;
+  border-left-style: solid;
+  white-space: nowrap;
+  font-size: small;
+ }
+
+/* 
+  arg is just like decl, except that wrapping is not allowed.  It is
+  used for function and constructor arguments which have a text box
+  to the right, where if wrapping is allowed the text box squashes up
+  the declaration by wrapping it.
+*/
+TD.arg { 
+  padding: 2px;
+  background-color: #f0f0f0; 
+  font-family: monospace;
+  vertical-align: top;
+  white-space: nowrap;
+  }
+
+TD.recfield { padding-left: 20px }
+
+TD.doc  { 
+  padding-top: 2px;
+  padding-left: 10px;
+  }
+
+TD.ndoc  { 
+  padding: 2px;
+  }
+
+TD.rdoc  { 
+  padding: 2px;
+  padding-left: 10px;
+  width: 100%;
+  }
+
+TD.body  { 
+  padding-left: 10px
+  }
+
+TD.pkg {
+  width: 100%;
+  padding-left: 10px
+}
+
+TABLE.indexsearch TR.indexrow {
+  display: none;
+}
+TABLE.indexsearch TR.indexshow {
+  display: table-row;
+}
+
+TD.indexentry {
+  vertical-align: top;
+  padding-right: 10px
+  }
+
+TD.indexannot {
+  vertical-align: top;
+  padding-left: 20px;
+  white-space: nowrap
+  }
+
+TD.indexlinks {
+  width: 100%
+  }
+
+/* ------- Section Headings ------- */
+
+TD.section1 {
+  padding-top: 15px;
+  font-weight: bold;
+  font-size: 150%
+  }
+
+TD.section2 {
+  padding-top: 10px;
+  font-weight: bold;
+  font-size: 130%
+  }
+
+TD.section3 {
+  padding-top: 5px;
+  font-weight: bold;
+  font-size: 110%
+  }
+
+TD.section4 {
+  font-weight: bold;
+  font-size: 100%
+  }
+
+/* -------------- The title bar at the top of the page */
+
+TD.infohead {
+  color: #ffffff;
+  font-weight: bold;
+  padding-right: 10px;
+  text-align: left;
+}
+
+TD.infoval {
+  color: #ffffff;
+  padding-right: 10px;
+  text-align: left;
+}
+
+TD.topbar {
+  background-color: #000099;
+  padding: 5px;
+}
+
+TD.title {
+  color: #ffffff;
+  padding-left: 10px;
+  width: 100%
+  }
+
+TD.topbut {
+  padding-left: 5px;
+  padding-right: 5px;
+  border-left-width: 1px;
+  border-left-color: #ffffff;
+  border-left-style: solid;
+  white-space: nowrap;
+  }
+
+TD.topbut A:link {
+  color: #ffffff
+  }
+
+TD.topbut A:visited {
+  color: #ffff00
+  }
+
+TD.topbut A:hover {
+  background-color: #6060ff;
+  }
+
+TD.topbut:hover {
+  background-color: #6060ff
+  }
+
+TD.modulebar { 
+  background-color: #0077dd;
+  padding: 5px;
+  border-top-width: 1px;
+  border-top-color: #ffffff;
+  border-top-style: solid;
+  }
+
+/* --------- The page footer --------- */
+
+TD.botbar {
+  background-color: #000099;
+  color: #ffffff;
+  padding: 5px
+  }
+TD.botbar A:link {
+  color: #ffffff;
+  text-decoration: underline
+  }
+TD.botbar A:visited {
+  color: #ffff00
+  }
+TD.botbar A:hover {
+  background-color: #6060ff
+  }
+
+‘_7http://joyful.com/repos/hledger/api-doc/haddock-util.jsOêbplist00‘	
+X$versionT$topY$archiverX$objects Ü†—_WebResourceResponseÄ_NSKeyedArchiverØ"&,-345QRSTUVWXYZ[\]^_`abcdecfjkU$null› !"#$%V$classR$3R$8S$10S$11R$5R$6R$4R$7R$2R$9R$0R$1Ä!ÄÄ  ÄÄÄÄÄ ”'()$+WNS.base[NS.relativeÄÄ Ä_7http://joyful.com/repos/hledger/api-doc/haddock-util.js“./01X$classesZ$classname¢12UNSURLXNSObject#A≠S¢A»”6789EWNS.keysZNS.objectsÄ´:;<=>?@ABCDÄ	Ä
+ÄÄÄÄÄÄÄÄÄ´FGHIJKLMNOPÄÄÄÄÄÄÄÄÄÄÄWX-Cache]Last-ModifiedSVia]Accept-RangesVServer\Content-TypeTDate_Proxy-Connection^Content-LengthTEtagZConnection_MISS from localhost_Sat, 18 Oct 2008 07:04:32 GMT_&1.1 localhost:3128 (squid/2.7.STABLE4)Ubytes_Apache/2.2.8 (Ubuntu)_application/x-javascript_Sat, 18 Oct 2008 08:08:43 GMTZkeep-aliveT3276_"3c88f5-ccc-45981b197a000"“./gh£hi2_NSMutableDictionary\NSDictionaryÃ“./lm£mn2_NSHTTPURLResponse]NSURLResponse     ) 2 7 : P R d â è ™ ± ¥ ∑ ª ø ¬ ≈ » À Œ — ‘ ◊ Ÿ € › ﬂ · „ Â Á È Î Ì Ô ˆ ˛
+JOXcflu~Äáèöú®™¨Æ∞≤¥∂∏∫ºæ ÃŒ–“‘÷ÿ⁄‹ﬁ‡Ëˆ˙!4CHSiâ≤∏–Î8=AWdglpÑ             o              í_application/x-javascriptOÃ// Haddock JavaScript utilities
+function toggle(button,id)
+{
+   var n = document.getElementById(id).style;
+   if (n.display == "none")
+   {
+    button.src = "minus.gif";
+    n.display = "block";
+   }
+   else
+   {
+    button.src = "plus.gif";
+    n.display = "none";
+   }
+}
+
+
+var max_results = 75; // 50 is not enough to search for map in the base libraries
+var shown_range = null;
+var last_search = null;
+
+function quick_search()
+{
+    perform_search(false);
+}
+
+function full_search()
+{
+    perform_search(true);
+}
+
+
+function perform_search(full)
+{
+    var text = document.getElementById("searchbox").value.toLowerCase();
+    if (text == last_search && !full) return;
+    last_search = text;
+    
+    var table = document.getElementById("indexlist");
+    var status = document.getElementById("searchmsg");
+    var children = table.firstChild.childNodes;
+    
+    // first figure out the first node with the prefix
+    var first = bisect(-1);
+    var last = (first == -1 ? -1 : bisect(1));
+
+    if (first == -1)
+    {
+        table.className = "";
+        status.innerHTML = "No results found, displaying all";
+    }
+    else if (first == 0 && last == children.length - 1)
+    {
+        table.className = "";
+        status.innerHTML = "";
+    }
+    else if (last - first >= max_results && !full)
+    {
+        table.className = "";
+        status.innerHTML = "More than " + max_results + ", press Search to display";
+    }
+    else
+    {
+        // decide what you need to clear/show
+        if (shown_range)
+            setclass(shown_range[0], shown_range[1], "indexrow");
+        setclass(first, last, "indexshow");
+        shown_range = [first, last];
+        table.className = "indexsearch";
+        status.innerHTML = "";
+    }
+
+    
+    function setclass(first, last, status)
+    {
+        for (var i = first; i <= last; i++)
+        {
+            children[i].className = status;
+        }
+    }
+    
+    
+    // do a binary search, treating 0 as ...
+    // return either -1 (no 0's found) or location of most far match
+    function bisect(dir)
+    {
+        var first = 0, finish = children.length - 1;
+        var mid, success = false;
+
+        while (finish - first > 3)
+        {
+            mid = Math.floor((finish + first) / 2);
+
+            var i = checkitem(mid);
+            if (i == 0) i = dir;
+            if (i == -1)
+                finish = mid;
+            else
+                first = mid;
+        }
+        var a = (dir == 1 ? first : finish);
+        var b = (dir == 1 ? finish : first);
+        for (var i = b; i != a - dir; i -= dir)
+        {
+            if (checkitem(i) == 0) return i;
+        }
+        return -1;
+    }    
+    
+    
+    // from an index, decide what the result is
+    // 0 = match, -1 is lower, 1 is higher
+    function checkitem(i)
+    {
+        var s = getitem(i).toLowerCase().substr(0, text.length);
+        if (s == text) return 0;
+        else return (s > text ? -1 : 1);
+    }
+    
+    
+    // from an index, get its string
+    // this abstracts over alternates
+    function getitem(i)
+    {
+        for ( ; i >= 0; i--)
+        {
+            var s = children[i].firstChild.firstChild.data;
+            if (s.indexOf(' ') == -1)
+                return s;
+        }
+        return ""; // should never be reached
+    }
+}
+‘_8http://joyful.com/repos/hledger/api-doc/haskell_icon.gifObplist00‘	
+X$versionT$topY$archiverX$objects Ü†—_WebResourceResponseÄ_NSKeyedArchiverØ"&,-345QRSTUVWXYZ[\]^_`abcdecfjkU$null› !"#$%V$classR$3R$8S$10S$11R$5R$6R$4R$7R$2R$9R$0R$1Ä!ÄÄ  ÄÄÄÄÄ ”'()$+WNS.base[NS.relativeÄÄ Ä_8http://joyful.com/repos/hledger/api-doc/haskell_icon.gif“./01X$classesZ$classname¢12UNSURLXNSObject#A≠S¢∂ä◊»”6789EWNS.keysZNS.objectsÄ´:;<=>?@ABCDÄ	Ä
+ÄÄÄÄÄÄÄÄÄ´FGHIJKLMNOPÄÄÄÄÄÄÄÄÄÄÄWX-Cache]Last-ModifiedSVia]Accept-RangesVServer\Content-TypeTDate_Proxy-Connection^Content-LengthTEtagZConnection_MISS from localhost_Sat, 18 Oct 2008 07:04:32 GMT_&1.1 localhost:3128 (squid/2.7.STABLE4)Ubytes_Apache/2.2.8 (Ubuntu)Yimage/gif_Sat, 18 Oct 2008 08:08:43 GMTZkeep-aliveS911_"3c88f0-38f-45981b197a000"“./gh£hi2_NSMutableDictionary\NSDictionaryè“./lm£mn2_NSHTTPURLResponse]NSURLResponse     ) 2 7 : P R d â è ™ ± ¥ ∑ ª ø ¬ ≈ » À Œ — ‘ ◊ Ÿ € › ﬂ · „ Â Á È Î Ì Ô ˆ ˛
+KPYdgmvÅàêõù©´≠Ø±≥µ∑πªΩøÀÕœ—”’◊Ÿ€›ﬂ·È˜˚	"5DITjä≥π—€˚
+',0FSV[_s             o              ÅYimage/gifOèGIF87a  ˜    Ä   Ä ÄÄ   ÄÄ Ä ÄÄ¿¿¿ÄÄÄˇ   ˇ ˇˇ   ˇˇ ˇ ˇˇˇˇˇ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                !˘    ,      l  x@∞†AÇ>8∞∞!√á>$@¿°C	–xp!∆ÜÑ4x „CêKdhp‰Jì	R<®2¶ÃôU≤º)í‰«ù8GÍ,à≥ß»ö,ãä§8tÈA¶ 8@µ™U™QF› u´¿Ä ;    1 < K i  ë ® Â Î ı" "!"%"."D"z&˘'7Y7b7ú<0<KII$I_M‚MÏ                           Q

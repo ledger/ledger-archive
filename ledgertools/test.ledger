@@ -1,0 +1,24 @@
+2008/01/11 * joe's diner
+    expenses:food:dining                      $12
+    assets:wells fargo:checking
+
+2008/01/12 * albertsons
+    expenses:food:groceries                   $33.30
+    expenses:gifts:charity                     $1.00
+    assets:cash                               $50.00
+    assets:coins:quarters                     $10.00
+    assets:wells fargo:checking              $-94.30
+
+2008/01/12 * fleurs du jour
+    expenses:gifts:so                         $83.79
+    assets:wells fargo:checking
+
+2008/01/13 * farmer's market
+    expenses:food:dining                       $8.50
+    expenses:food:dining                       $3.50
+    assets:cash
+
+2008/01/13 * laundry
+    expenses:clothing:laundry                  $2.50
+    assets:coins:quarters
+

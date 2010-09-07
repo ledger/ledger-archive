@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Flot Examples</title>
+		<!--<link href="layout.css" rel="stylesheet" type="text/css"></link>-->
+		<style type='text/css'>
+			.pieLabel div {
+				font-size: 11px;
+				text-align: center;
+			}
+			body {
+				text-align: center;
+			}
+
+			.navcontainer ul
+			{
+				padding: .2em 0;
+				margin: 0;
+				list-style-type: none;
+				background-color: #036;
+				color: #FFF;
+				width: 100%;
+				font: normal 90% sans-serif;
+				text-align: center;
+			}
+
+			li { display: inline; }
+
+			li a
+			{
+				text-decoration: none;
+				background-color: #036;
+				color: #FFF;
+				padding: .2em .5em;
+			}
+
+			li a:hover
+			{
+				background-color: #369;
+				color: #fff;
+			}
+
+			li.active a
+			{
+				background-color: #059;
+			}
+
+			li.active a:hover
+			{
+				background-color: #369;
+				color: #fff;
+			}
+
+			.endq
+			{
+				padding-right: 3em;
+			}
+
+		</style>
+		<!--[if IE]><script language="javascript" type="text/javascript" src="/static/excanvas.pack.js"></script><![endif]-->
+		<script language="javascript" type="text/javascript" src="/static/jquery.js"></script>
+		<script language="javascript" type="text/javascript" src="/static/jquery.flot.pie.js"></script>
+
+	</head>
+	<body>
+		<div style='width: 780px; margin: 0pt auto'>
+			<h1 style='font-family: arial, sans serif;'>Finances for {{ begin.strftime('%Y/%m/%d') }} to {{ end.strftime('%Y/%m/%d') }}</h1>
+
+
+		<div class="navcontainer">
+			<ul class="navlist">
+				<li><a href='/balance/{{ begin.strftime('%Y.%m.%d') }}/{{ end.strftime('%Y.%m.%d') }}/'>Balance</a></li>
+				<li><a href='/register/{{ begin.strftime('%Y.%m.%d') }}/{{ end.strftime('%Y.%m.%d') }}/'>Register</a></li>
+				<li class='active'><a href='/plot/{{ begin.strftime('%Y.%m.%d') }}/{{ end.strftime('%Y.%m.%d') }}/'>Graphs</a></li>
+			</ul>
+		</div>
+
+		<div class="navcontainer">
+			<ul class="navlist">
+				<li class='endq'><a href='/plot/'>All</a></li>
+				<li><a href='/plot/{{ year-2 }}.01.01/{{ year-1 }}.01.01/'>{{ year-2 }}</a></li>
+				<li><a href='/plot/{{ year-1 }}.01.01/{{ year+0 }}.01.01/'>{{ year-1 }}</a></li>
+				<li class='active'><a href='/plot/{{ year+0 }}.01.01/{{ year+1 }}.01.01/'>{{ year+0 }}</a></li>
+				<li><a href='/plot/{{ year+1 }}.01.01/{{ year+2 }}.01.01/'>{{ year+1 }}</a></li>
+				<li><a href='/plot/{{ year+2 }}.01.01/{{ year+3 }}.01.01/'>{{ year+2 }}</a></li>
+			</ul>
+		</div>
+
+		<div class="navcontainer">
+			<ul class="navlist1">
+				<li class='{{active['q1']}} '><a href='/plot/{{ year }}.01.01/{{ year }}.04.01/'>Q1</a></li>
+				<li class='{{active['q2']}} '><a href='/plot/{{ year }}.04.01/{{ year }}.07.01/'>Q2</a></li>
+				<li class='{{active['q3']}} '><a href='/plot/{{ year }}.07.01/{{ year }}.10.01/'>Q3</a></li>
+				<li class='{{active['q4']}} endq'><a href='/plot/{{ year }}.10.01/{{ year+1 }}.01.01/'>Q4</a></li>
+				<li class='{{active['jan']}}'><a href='/plot/{{ year }}.01.01/{{ year }}.02.01/'>Jan</a></li>
+				<li class='{{active['feb']}}'><a href='/plot/{{ year }}.02.01/{{ year }}.03.01/'>Feb</a></li>
+				<li class='{{active['mar']}}'><a href='/plot/{{ year }}.03.01/{{ year }}.04.01/'>Mar</a></li>
+				<li class='{{active['apr']}}'><a href='/plot/{{ year }}.04.01/{{ year }}.05.01/'>Apr</a></li>
+				<li class='{{active['may']}}'><a href='/plot/{{ year }}.05.01/{{ year }}.06.01/'>May</a></li>
+				<li class='{{active['jun']}}'><a href='/plot/{{ year }}.06.01/{{ year }}.07.01/'>Jun</a></li>
+				<li class='{{active['jul']}}'><a href='/plot/{{ year }}.07.01/{{ year }}.08.01/'>Jul</a></li>
+				<li class='{{active['aug']}}'><a href='/plot/{{ year }}.08.01/{{ year }}.09.01/'>Aug</a></li>
+				<li class='{{active['sep']}}'><a href='/plot/{{ year }}.09.01/{{ year }}.10.01/'>Sep</a></li>
+				<li class='{{active['oct']}}'><a href='/plot/{{ year }}.10.01/{{ year }}.11.01/'>Oct</a></li>
+				<li class='{{active['nov']}}'><a href='/plot/{{ year }}.11.01/{{ year }}.12.01/'>Nov</a></li>
+				<li class='{{active['dec']}}'><a href='/plot/{{ year }}.12.01/{{ year+1 }}.01.01/'>Dec</a></li>
+			</ul>
+		</div>
+		<br />
+		<br />
+
+
+		<div style='padding-left: 20px; font-family: monospace'>
+			<p>
+			{% for l in checking %}
+			<span style='background-color: {% if l[1] %}#fee{% else %}#efe{% endif %}'>{{ l[0] }}</span><br />
+			{% endfor %}
+			</p>
+		</div>
+
+ </body>
+</html>
+

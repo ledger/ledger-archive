@@ -1,0 +1,382 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Finances</title>
+		<!--<link href="layout.css" rel="stylesheet" type="text/css"></link>-->
+		<style type='text/css'>
+			.pieLabel div {
+				font-size: 11px;
+				text-align: center;
+			}
+			body {
+				text-align: center;
+			}
+
+			.navcontainer ul
+			{
+				padding: .2em 0;
+				margin: 0;
+				list-style-type: none;
+				background-color: #036;
+				color: #FFF;
+				width: 100%;
+				font: normal 90% sans-serif;
+				text-align: center;
+			}
+
+			li { display: inline; }
+
+			li a
+			{
+				text-decoration: none;
+				background-color: #036;
+				color: #FFF;
+				padding: .2em .5em;
+			}
+
+			li a:hover
+			{
+				background-color: #369;
+				color: #fff;
+			}
+
+			li.active a
+			{
+				background-color: #059;
+			}
+
+			li.active a:hover
+			{
+				background-color: #369;
+				color: #fff;
+			}
+
+			.endq
+			{
+				padding-right: 3em;
+			}
+
+		</style>
+		<!--[if IE]><script language="javascript" type="text/javascript" src="/static/excanvas.pack.js"></script><![endif]-->
+		<script language="javascript" type="text/javascript" src="/static/jquery.js"></script>
+		<script language="javascript" type="text/javascript" src="/static/jquery.flot.pie.js"></script>
+
+<script id="source" language="javascript" type="text/javascript">
+function FormatFloat(pFloat, pDp){
+    var m = Math.pow(10, pDp);
+    return parseInt(pFloat * m, 10) / m;
+}
+function commatize(num){
+	var s = num.toString();
+	var c = s.split('.');
+	var d = c[0];
+	var l = d.length;
+
+	for (var i = l-3; i > 0; i-=3)
+	{
+		d = d.substr(0, i) + ',' + d.substr(i);
+	}
+
+	if (c.length > 1)
+		if (c[1].length == 1)
+			return d + '.' + c[1] + '0';
+		else
+			return d + '.' + c[1];
+	else
+		return d + '.00';
+}
+function currency(num){
+	return '$' + commatize(num);
+}
+$(function () {
+
+	var d = [
+		{% for r in reg %}
+		[new Date("{{r[0].strftime('%Y/%m/%d')}}").getTime(), {{r[1]}}],
+		{% endfor %}
+	];
+
+	var e = [
+		{% for r in exp %}
+		[new Date("{{r[0].strftime('%Y/%m/%d')}}").getTime(), {{r[1]}}],
+		{% endfor %}
+	];
+
+	var assets = [
+		{% for r in assets %}
+		[new Date("{{r[0].strftime('%Y/%m/%d')}}").getTime(), {{r[1]}}],
+		{% endfor %}
+	];
+
+	var mn = (new Date('{{begin.strftime("%Y/%m/%d")}}').getTime());
+	var mx = (new Date('{{end.strftime("%Y/%m/%d")}}').getTime());
+
+	//console.log(mn);
+	//console.log(mx);
+
+	var start = null;
+	var end = null;
+	for (var i = 0; i < assets.length; i++)
+	{
+		if (assets[i][0] >= mn && start == null)
+			start = assets[i][1];
+		if (assets[i][0] <= mx)
+			end = assets[i][1];
+	}
+
+	if (start == null)
+	{
+		start = 1;
+		end = 1;
+	}
+
+	//console.log('start = ' + start);
+	//console.log('end = ' + end);
+
+	var gain = FormatFloat(100 * (end - start) / Math.abs(start), 2);
+	if (gain >= 0)
+	{
+		gain = '+' + gain + '% gain';
+		$('#assets_gain')[0].style.color = 'green';
+	}
+	else
+	{
+		gain = gain + '% loss';
+		$('#assets_gain')[0].style.color = 'red';
+	}
+
+	$('#assets_gain')[0].innerHTML = gain;
+	$('#assets_gain')[0].style.fontWeight = 'bold';
+
+	var mmm = 0;
+	for (var i = 0; i < d.length; i++)
+		if (d[i][0] >= mn && d[i][0] <= mx && d[i][1] > mmm)
+			mmm = d[i][1];
+	for (var i = 0; i < e.length; i++)
+		if (e[i][0] >= mn && e[i][0] <= mx && e[i][1] > mmm)
+			mmm = e[i][1];
+
+	//console.log(mmm);
+
+	var inc = 0;
+	for (var i = 0; i < d.length; i++)
+		if (d[i][0] >= mn && d[i][0] < mx)
+			inc += d[i][1];
+
+	var exp = 0;
+	for (var i = 0; i < e.length; i++)
+		if (e[i][0] >= mn && e[i][0] < mx)
+			exp += e[i][1];
+
+	var cashflow = FormatFloat(inc - exp, 2);
+	if (cashflow >= 0)
+	{
+		cashflow = '+' + currency(cashflow);
+		$('#cashflow')[0].style.color = 'green';
+	}
+	else
+	{
+		cashflow = currency(cashflow);
+		$('#cashflow')[0].style.color = 'red';
+	}
+
+	$('#cashflow')[0].innerHTML = cashflow;
+	$('#cashflow')[0].style.fontWeight = 'bold';
+
+
+	$.plot($("#placeholder"),
+		[ {data: d, label: 'Income', lines: { show: true, fill: true}},
+		  {data: e, label: 'Expenses', lines: { show: true, fill: true}} ],
+		  { xaxis: { mode: "time"
+		  , min: mn, 
+			max: mx
+			},
+yaxis: { max: mmm*1.2 } });
+
+	$.plot($("#placeholder2"),
+		[ {data: assets, lines: { show: true, fill: true}} ],
+		{ xaxis: { mode: "time",
+			min: mn,
+			max: mx} });
+
+	/*
+	$.plot($("#placeholder3"),
+			[ {data: [
+			
+			{% for e in expenses %}
+			[, {{e[1]}}],
+			{% endfor %}
+			
+			], bars: { show: true, fill: true}} ],
+			{ xaxis: {ticks: [
+			
+			{% for e in expenses %}
+			[{{loop.index0}}, '{{e[0]}}'],
+			{% endfor %}
+			]
+
+			} });
+			*/
+
+/*
+    $("#whole").click(function () {
+        $.plot($("#placeholder"), [d], { xaxis: { mode: "time" } });
+    });
+
+    $("#nineties").click(function () {
+        $.plot($("#placeholder"), [d], { xaxis: {
+            mode: "time",
+            min: (new Date("1990/01/01")).getTime(),
+            max: (new Date("2000/01/01")).getTime()
+        } });
+    });
+
+    $("#ninetynine").click(function () {
+        $.plot($("#placeholder"), [d], { xaxis: {
+            mode: "time",
+            minTickSize: [1, "month"],
+            min: (new Date("1999/01/01")).getTime(),
+            max: (new Date("2000/01/01")).getTime()
+        } });
+    });
+*/
+
+});
+</script>
+
+<script id="source" language="javascript" type="text/javascript">
+$(function () {
+		var d = [
+		{% for e in expenseso %}
+		{ label: "{{e[0]}}",  data: {{e[1]}}},
+		{% endfor %}
+		];
+
+		if (d.length == 0) {
+			$('#placeholder3')[0].innerHTML = 'No expenses found!';
+		}
+		else
+		{
+			$.plot($("#placeholder3"), d, 
+			{
+				pie: { 
+					show: true, 
+					pieStrokeLineWidth: 1, 
+					pieStrokeColor: '#fff', 
+					pieChartRadius: 100, 			// by default it calculated by 
+					centerOffsetTop:30,
+					centerOffsetLeft:50, 			// if 'auto' and legend position is "nw" then centerOffsetLeft is equal a width of legend.
+					showLabel: true,				//use ".pieLabel div" to format looks of labels
+					labelOffsetFactor: 7.3/6, 		// part of radius (default 5/6)
+					//labelOffset: 0        		// offset in pixels if > 0 then labelOffsetFactor is ignored
+					labelBackgroundOpacity: 0.85, 	// default is 0.85
+					labelFormatter: function(serie){// default formatter is "serie.label"
+						//return serie.label;
+						//return serie.data;
+						return serie.label+'<br/>'+Math.round(serie.percent)+'%';
+						//return serie.label+'<br/>'+serie.data;
+					}
+				},
+				legend: {
+					show: false, 
+					position: "ne", 
+					backgroundOpacity: 0
+				}
+			})
+		}
+});
+</script>
+
+
+
+	</head>
+	<body>
+		<div style='width: 780px; margin: 0pt auto;'>
+			<h1 style='font-family: arial, sans serif;'>Finances for {{ begin.strftime('%Y/%m/%d') }} to {{ end.strftime('%Y/%m/%d') }}</h1>
+
+
+			<!--
+			<div class="navcontainer">
+				<ul class="navlist">
+					<li><a href='/balance/{{ begin.strftime('%Y.%m.%d') }}/{{ end.strftime('%Y.%m.%d') }}/'>Balance</a></li>
+					<li><a href='/register/{{ begin.strftime('%Y.%m.%d') }}/{{ end.strftime('%Y.%m.%d') }}/'>Register</a></li>
+					<li class='active'><a href='/{{ begin.strftime('%Y.%m.%d') }}/{{ end.strftime('%Y.%m.%d') }}/'>Graphs</a></li>
+				</ul>
+			</div>
+			-->
+
+			<div class="navcontainer">
+				<ul class="navlist">
+					<li><a href='/'>All</a></li>
+					<li class='endq'><a href='/{{ today.year }}.01.01/{{ today.strftime('%Y.%m.%d') }}/'>YTD</a></li>
+					<li><a href='/{{ year-2 }}.01.01/{{ year-1 }}.01.01/'>{{ year-2 }}</a></li>
+					<li><a href='/{{ year-1 }}.01.01/{{ year+0 }}.01.01/'>{{ year-1 }}</a></li>
+					<li class='active'><a href='/{{ year+0 }}.01.01/{{ year+1 }}.01.01/'>{{ year+0 }}</a></li>
+					<li><a href='/{{ year+1 }}.01.01/{{ year+2 }}.01.01/'>{{ year+1 }}</a></li>
+					<li><a href='/{{ year+2 }}.01.01/{{ year+3 }}.01.01/'>{{ year+2 }}</a></li>
+				</ul>
+			</div>
+
+			<div class="navcontainer">
+				<ul class="navlist1">
+					<li class='{{active['q1']}} '><a href='/{{ year }}.01.01/{{ year }}.04.01/'>Q1</a></li>
+					<li class='{{active['q2']}} '><a href='/{{ year }}.04.01/{{ year }}.07.01/'>Q2</a></li>
+					<li class='{{active['q3']}} '><a href='/{{ year }}.07.01/{{ year }}.10.01/'>Q3</a></li>
+					<li class='{{active['q4']}} endq'><a href='/{{ year }}.10.01/{{ year+1 }}.01.01/'>Q4</a></li>
+					<li class='{{active['jan']}}'><a href='/{{ year }}.01.01/{{ year }}.02.01/'>Jan</a></li>
+					<li class='{{active['feb']}}'><a href='/{{ year }}.02.01/{{ year }}.03.01/'>Feb</a></li>
+					<li class='{{active['mar']}}'><a href='/{{ year }}.03.01/{{ year }}.04.01/'>Mar</a></li>
+					<li class='{{active['apr']}}'><a href='/{{ year }}.04.01/{{ year }}.05.01/'>Apr</a></li>
+					<li class='{{active['may']}}'><a href='/{{ year }}.05.01/{{ year }}.06.01/'>May</a></li>
+					<li class='{{active['jun']}}'><a href='/{{ year }}.06.01/{{ year }}.07.01/'>Jun</a></li>
+					<li class='{{active['jul']}}'><a href='/{{ year }}.07.01/{{ year }}.08.01/'>Jul</a></li>
+					<li class='{{active['aug']}}'><a href='/{{ year }}.08.01/{{ year }}.09.01/'>Aug</a></li>
+					<li class='{{active['sep']}}'><a href='/{{ year }}.09.01/{{ year }}.10.01/'>Sep</a></li>
+					<li class='{{active['oct']}}'><a href='/{{ year }}.10.01/{{ year }}.11.01/'>Oct</a></li>
+					<li class='{{active['nov']}}'><a href='/{{ year }}.11.01/{{ year }}.12.01/'>Nov</a></li>
+					<li class='{{active['dec']}}'><a href='/{{ year }}.12.01/{{ year+1 }}.01.01/'>Dec</a></li>
+				</ul>
+			</div>
+			<br />
+			<br />
+
+
+			<div style='padding-left: 20px; float: left'>
+				Income vs. Expenses (Cashflow: <span id='cashflow'></span>)
+				<div id="placeholder" style="width:350px;height:200px;"></div>
+			</div>
+			<div style='padding-right: 20px; float: right'>
+				Assets (<span id='assets_gain'></span>)
+				<div id="placeholder2" style="width:350px;height:200px;"></div>
+			</div>
+			<div style='clear: both; padding-top: 40px; padding-left: 20px; text-align: center'>
+				Expenses
+				<br />
+				<br />
+				<div style='padding-left: 20px; float: left'>
+					<div id="placeholder3" style="width:350px;height:300px;"></div>
+				</div>
+				<div style='width:350px;height: 100%;padding-right: 20px; float: right; text-align: left; vertical-align: bottom'>
+					<table cellpadding='3' cellspacing='0'>
+						{% for e in expenses %}
+						<tr bgcolor='{{ loop.cycle("#ffffff","#f8f8f8") }}'>
+							<td>{{e[0]}}</td>
+							<td align='right'><script language='javascript'>document.write(currency({{e[1]}}));</script></td>
+						</tr>
+						{% endfor %}
+						<tr>
+							<td style='width: 100px; border-top: 1px solid black;'></td><td style='border-top: 1px solid black;' align='right'><script language='javascript'>document.write(currency({{exp_sum}}))</script></td>
+						</tr>
+					</table>
+				</div>
+
+			</div>
+		</div>
+
+
+
+
+ </body>
+</html>
+

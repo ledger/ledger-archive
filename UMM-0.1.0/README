@@ -1,0 +1,18 @@
+Umm is an extremely minimal command-line program to read a plain-text
+ledger file and report balance and other information. Although
+minimal, it aims to be able to handle multiple accounts, currencies,
+commodities, and securities. It doesn't abolutely force you to use
+double-entry bookkeeping, although it tries to make it easy to do so.
+
+Umm should have no dependencies other than a haskell compiler and
+standard libraries, although I've not tested it with anything except
+ghc. I've built it with both ghc 6.8.3 on an iMac G3 running OSX
+10.3.9 and ghc 6.10.3 on an x86 running Ubuntu. You should be able to
+build umm simply by running
+
+	cabal configure && cabal build
+
+For more information, build umm, then run "umm --help", and read the
+output of that. Arguably, that info should be in this file... later.
+Then look at the two files sample1.dat and sample2.dat; they are very
+simple examples of ledgers.
