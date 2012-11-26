@@ -4,3 +4,6 @@
 [submodule "DepreciateForLedger"]
 	path = DepreciateForLedger
 	url = git://github.com/tazzben/DepreciateForLedger
+[submodule "Github-Receipt"]
+	path = Github-Receipt
+	url = git://github.com/jpiasetz/Github-Receipt.git
