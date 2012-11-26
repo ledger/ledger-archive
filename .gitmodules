@@ -1,6 +1,6 @@
 [submodule "lib/utfcpp"]
 	path = lib/utfcpp
-	url = git://github.com/jwiegley/utfcpp.git
+	url = git://github.com/ledger/utfcpp.git
 [submodule "DepreciateForLedger"]
 	path = DepreciateForLedger
 	url = git://github.com/tazzben/DepreciateForLedger
@@ -48,7 +48,7 @@
 	url = git://github.com/jwiegley/beancount.git
 [submodule "cl-ledger"]
 	path = cl-ledger
-	url = git://github.com/jwiegley/periods.git
+	url = git://github.com/jwiegley/cl-ledger.git
 [submodule "ledgerdemain"]
 	path = ledgerdemain
 	url = git://github.com/sabren/ledgerdemain.git
