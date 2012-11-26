@@ -34,3 +34,6 @@
 [submodule "ledger-web"]
 	path = ledger-web
 	url = git://github.com/peterkeen/ledger-web.git
+[submodule "ledger-website"]
+	path = ledger-website
+	url = git://github.com/simonmichael/ledger-website.git
