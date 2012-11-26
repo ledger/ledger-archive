@@ -52,3 +52,6 @@
 [submodule "ledgerdemain"]
 	path = ledgerdemain
 	url = git://github.com/sabren/ledgerdemain.git
+[submodule "moneywise"]
+	path = moneywise
+	url = git://github.com/jwiegley/moneywise.git
