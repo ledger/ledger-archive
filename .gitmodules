@@ -1,0 +1,6 @@
+[submodule "lib/utfcpp"]
+	path = lib/utfcpp
+	url = git://github.com/jwiegley/utfcpp.git
+[submodule "DepreciateForLedger"]
+	path = DepreciateForLedger
+	url = git://github.com/tazzben/DepreciateForLedger
