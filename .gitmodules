@@ -49,3 +49,6 @@
 [submodule "cl-ledger"]
 	path = cl-ledger
 	url = git://github.com/jwiegley/periods.git
+[submodule "ledgerdemain"]
+	path = ledgerdemain
+	url = git://github.com/sabren/ledgerdemain.git
