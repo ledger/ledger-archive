@@ -40,3 +40,6 @@
 [submodule "ledger_tools"]
 	path = ledger_tools
 	url = git://github.com/spiffytech/ledger_tools.git
+[submodule "mtc2011"]
+	path = mtc2011
+	url = git://github.com/zdw/mtc2011.git
