@@ -46,3 +46,6 @@
 [submodule "beancount"]
 	path = beancount
 	url = git://github.com/jwiegley/beancount.git
+[submodule "cl-ledger"]
+	path = cl-ledger
+	url = git://github.com/jwiegley/periods.git
