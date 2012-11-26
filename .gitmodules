@@ -55,3 +55,6 @@
 [submodule "moneywise"]
 	path = moneywise
 	url = git://github.com/jwiegley/moneywise.git
+[submodule "Ledger-Tools-Demo"]
+	path = Ledger-Tools-Demo
+	url = git://github.com/peterkeen/Ledger-Tools-Demo.git
