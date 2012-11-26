@@ -7,3 +7,6 @@
 [submodule "Github-Receipt"]
 	path = Github-Receipt
 	url = git://github.com/jpiasetz/Github-Receipt.git
+[submodule "LedgerScheduler"]
+	path = LedgerScheduler
+	url = git://github.com/tazzben/LedgerScheduler
