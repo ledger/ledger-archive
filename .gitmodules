@@ -10,3 +10,6 @@
 [submodule "LedgerScheduler"]
 	path = LedgerScheduler
 	url = git://github.com/tazzben/LedgerScheduler
+[submodule "QIFtoLedger"]
+	path = QIFtoLedger
+	url = git://github.com/Kolomona/QIFtoLedger.git
