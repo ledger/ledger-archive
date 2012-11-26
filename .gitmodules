@@ -22,3 +22,6 @@
 [submodule "ledger-ical"]
 	path = ledger-ical
 	url = git://github.com/bettse/ledger-ical
+[submodule "ledger-journal"]
+	path = ledger-journal
+	url = git://github.com/kertap/ledger-journal.git
