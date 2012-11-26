@@ -25,3 +25,6 @@
 [submodule "ledger-journal"]
 	path = ledger-journal
 	url = git://github.com/kertap/ledger-journal.git
+[submodule "ledger-ofc"]
+	path = ledger-ofc
+	url = git://github.com/bettse/ledger-ofc
