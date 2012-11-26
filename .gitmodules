@@ -43,3 +43,6 @@
 [submodule "mtc2011"]
 	path = mtc2011
 	url = git://github.com/zdw/mtc2011.git
+[submodule "beancount"]
+	path = beancount
+	url = git://github.com/jwiegley/beancount.git
