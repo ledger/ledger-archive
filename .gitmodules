@@ -31,3 +31,6 @@
 [submodule "ledger-snap"]
 	path = ledger-snap
 	url = git://github.com/peterkeen/ledger-snap.git
+[submodule "ledger-web"]
+	path = ledger-web
+	url = git://github.com/peterkeen/ledger-web.git
