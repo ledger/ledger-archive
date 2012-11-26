@@ -13,3 +13,6 @@
 [submodule "QIFtoLedger"]
 	path = QIFtoLedger
 	url = git://github.com/Kolomona/QIFtoLedger.git
+[submodule "icsv2ledger"]
+	path = icsv2ledger
+	url = git://github.com/quentinsf/icsv2ledger.git
