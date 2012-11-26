@@ -19,3 +19,6 @@
 [submodule "ledger-flot"]
 	path = ledger-flot
 	url = git://github.com/bettse/ledger-flot
+[submodule "ledger-ical"]
+	path = ledger-ical
+	url = git://github.com/bettse/ledger-ical
