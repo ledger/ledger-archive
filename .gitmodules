@@ -28,3 +28,6 @@
 [submodule "ledger-ofc"]
 	path = ledger-ofc
 	url = git://github.com/bettse/ledger-ofc
+[submodule "ledger-snap"]
+	path = ledger-snap
+	url = git://github.com/peterkeen/ledger-snap.git
