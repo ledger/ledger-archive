@@ -16,3 +16,6 @@
 [submodule "icsv2ledger"]
 	path = icsv2ledger
 	url = git://github.com/quentinsf/icsv2ledger.git
+[submodule "ledger-flot"]
+	path = ledger-flot
+	url = git://github.com/bettse/ledger-flot
