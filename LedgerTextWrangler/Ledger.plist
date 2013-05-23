@@ -1,0 +1,116 @@
+<!-- Gleefully brought to you by Lifepillar -->
+<!-- Version 1.0.0 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BBEditDocumentType</key>
+	<string>CodelessLanguageModule</string> 
+	<key>BBLMColorsSyntax</key> <true/> 
+	<key>BBLMIsCaseSensitive</key> <false/>
+	<key>BBLMLanguageCode</key> 
+	<string>Ldgr</string>
+	<key>BBLMLanguageDisplayName</key> 
+	<string>Ledger</string> 
+	<key>BBLMScansFunctions</key>
+	<true/>
+	<key>BBLMSuffixMap</key>
+	<array> 
+		<dict>
+			<key>BBLMLanguageSuffix</key> 
+			<string>.ledger</string>
+		</dict>
+	</array> 
+	<key>BBLMCanSpellCheckCodeRuns</key>
+	<false/>
+	<key>Language Features</key> 
+	<dict>
+		<key>Identifier and Keyword Characters</key>
+		<string><![CDATA[!ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz]]></string>
+		<key>Comment Pattern</key>
+		<string><![CDATA[;.*$]]></string>
+		<key>String Pattern</key>
+		<!-- Adapt currencies as needed (I'm too lazy to add them all) -->
+		<string><![CDATA[-?(\d+([,\.]\d+)*\s*(EUR|USD|CAD|AUD))|([\$]\s*\d+([,\.]\d+)*)|(\d+[:\/]\d+[:\/]\d+)]]></string>
+		<key>Function Pattern</key>
+		<string><![CDATA[(?x:
+			(?P<function>(?P<function_name>(^\d+.+$)))
+		)]]></string>
+		<key>Skip Pattern</key>
+		<string><![CDATA[(?x:(?P>comment))]]></string>
+	</dict> 	
+	<key>BBLMKeywordList</key> 
+	<array>
+	<string>Day</string>
+	<string>Week</string>
+	<string>Month</string>
+	<string>Quarter</string>
+	<string>Year</string>
+	<string>Days</string>
+	<string>Weeks</string>
+	<string>Months</string>
+	<string>Quarters</string>
+	<string>Years</string>
+	<string>Daily</string>
+	<string>Weekly</string>
+	<string>Biweekly</string>
+	<string>Monthly</string>
+	<string>Bimonthly</string>
+	<string>Quarterly</string>
+	<string>Yearly</string>
+	<string>Every</string>
+	<string>January</string>
+	<string>February</string>
+	<string>March</string>
+	<string>April</string>
+	<string>May</string>
+	<string>June</string>
+	<string>July</string>
+	<string>August</string>
+	<string>September</string>
+	<string>October</string>
+	<string>November</string>
+	<string>December</string>
+	<string>Jan</string>
+	<string>Feb</string>
+	<string>Mar</string>
+	<string>Apr</string>
+	<string>May</string>
+	<string>Jun</string>
+	<string>Jul</string>
+	<string>Aug</string>
+	<string>Sep</string>
+	<string>Oct</string>
+	<string>Nov</string>
+	<string>Dec</string>
+	<string>This</string>
+	<string>Next</string>
+	<string>Last</string>
+	<string>In</string>
+	<string>From</string>
+	<string>Since</string>
+	<string>To</string>
+	<string>Until</string>
+	<!-- Commmand directives -->
+	<string>!include</string>
+	<string>!account</string>
+	<string>!end</string>
+	<!-- The following are not Ledger keywords -->
+	<!-- Feel free to remove them, modify them or add more -->
+	<string>Assets</string>
+	<string>Liabilities</string>
+	<string>Income</string>
+	<string>Expenses</string>
+	<string>Equity</string>
+	<string>Cash</string>
+	<string>Checking</string>
+	<string>Debit</string>
+	<string>Credit</string>
+	<string>Card</string>
+	<string>Savings</string>
+	<string>Accounts</string>
+	<string>Payable</string>
+	<string>Receivable</string>
+</array>
+</dict> 
+</plist>

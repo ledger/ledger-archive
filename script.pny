@@ -1,0 +1,62 @@
+; @
+; #
+; $
+; ^
+; ()
+; {}
+; \
+; _
+; :
+; ,
+; .
+; `
+; ~
+
+x = 10
+y = $10
+z = USD 10
+w = 10 USD
+
+s1 = "string"
+s2 = 'string'
+d1 = [june 2010]
+
+print("- x       => ", - x)
+
+print("- x       => ", - x)
+print("! x       => ", ! x)
+print("not x     => ", not x)
+
+print("x + y     => ", x + y)
+print("x - y     => ", x - y)
+print("x / y     => ", x / y)
+print("x % y     => ", x % y)
+print("x * y     => ", x * y)
+
+print("x == y    => ", x == y)
+print("x != y    => ", x != y)
+print("x < y     => ", x < y)
+print("x <= y    => ", x <= y)
+print("x > y     => ", x > y)
+print("x >= y    => ", x >= y)
+
+print("x ? y : z => ", x ? y : z)
+
+print("x && y    => ", x && y)
+print("x and y   => ", x and y)
+print("x || y    => ", x || y)
+print("x or y    => ", x or y)
+
+fa          = "Hello"
+fb(x)       = "Hello, " + x
+fc(x, y)    = "Hello, " + x  + ", " + y
+fd(x, y, z) = format("Terms: %(x) %(y) %(z)")
+
+fe = xx, yy -> format("Terms: %(xx) %(yy)")
+
+print(fa)
+print(fa())
+print(fb("world!"))
+print(fc("world", "and goodbye!"))
+print(fd("alpha", "beta", "gamma"))
+print(fe("world", "and goodbye!"))
